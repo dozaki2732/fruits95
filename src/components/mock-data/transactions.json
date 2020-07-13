@@ -1,0 +1,144 @@
+[
+  {
+    "id": "4d57db59-b30d-43c7-a554-d959cefb9806",
+    "type": "expense",
+    "amount": 950,
+    "date": 1591769105000,
+    "category": "rent"
+  },
+
+  {
+    "id": "ea4c88c8-bd4d-4a5c-bfbb-d056d762b5fc",
+    "type": "expense",
+    "amount": 40,
+    "date": 1592042885000,
+    "category": "utilities"
+  },
+  {
+    "id": "3f627bf1-5366-4564-a8a7-2cfc1469405c",
+    "type": "expense",
+    "amount": 54,
+    "date": 1592129285000,
+    "category": "recreational"
+  },
+  {
+    "id": "2e2c5aea-f7d7-4e14-abcd-8a3934dfb4f3",
+    "type": "expense",
+    "amount": 102,
+    "date": 1592226485000,
+    "category": "clothing"
+  },
+  {
+    "id": "ec4f1699-b77a-4fa4-b551-53dfd2d363ce",
+    "type": "expense",
+    "amount": 15,
+    "date": 1592227565000,
+    "category": "utilities"
+  },
+  {
+    "id": "dc6a8358-b95d-4cb8-af84-07ac4c76cf85",
+    "type": "expense",
+    "amount": 65,
+    "date": 1592292365000,
+    "category": "cosmetic"
+  },
+  {
+    "id": "11c85737-79ee-4bc4-a94b-a878fbcb15b8",
+    "type": "expense",
+    "amount": 12,
+    "date": 1592443574000,
+    "category": "restaurant"
+  },
+  {
+    "id": "602391b4-5b73-4c3e-a0fc-dbf5bb5030d6",
+    "type": "expense",
+    "amount": 43,
+    "date": 1592537174000,
+    "category": "recreational"
+  },
+  {
+    "id": "529ddf26-9395-4c34-a0dd-6c0eb1d26c32",
+    "type": "expense",
+    "amount": 39.99,
+    "date": 1592576774000,
+    "category": "utilities"
+  },
+  {
+    "id": "7db2df86-4153-4fa1-8705-2ea759803931",
+    "type": "expense",
+    "amount": 25,
+    "date": 1592648529000,
+    "category": "groceries"
+  },
+  {
+    "id": "bacea0c5-a039-4efe-85f7-26a3b11b3051",
+    "type": "income",
+    "amount": 10,
+    "date": 1592734929000,
+    "category": "refund"
+  },
+  {
+    "id": "a346ab44-d38b-4c1b-b114-a261308c61b2",
+    "type": "expense",
+    "amount": 32,
+    "date": 1592842929000,
+    "category": "transportation"
+  },
+  {
+    "id": "d401d2ee-e0e3-4661-b190-42892e0c247d",
+    "type": "expense",
+    "amount": 12,
+    "date": 1592847489000,
+    "category": "misc"
+  },
+  {
+    "id": "28197c77-bbbf-44e9-b412-587aaa3e0c75",
+    "type": "income",
+    "amount": 25,
+    "date": 1592911749000,
+    "category": "gift"
+  },
+  {
+    "id": "680552ab-e03b-4f0e-91b8-ba628ab2e411",
+    "type": "expense",
+    "amount": 7,
+    "date": 1593062469000,
+    "category": "misc"
+  },
+  {
+    "id": "0073fa20-645b-4e0f-9e10-fcc1d15253de",
+    "type": "expense",
+    "amount": 56,
+    "date": 1593170469000,
+    "category": "utilities"
+  },
+  {
+    "id": "78c8a36b-d47c-49b8-aab4-34c03f014d7e",
+    "type": "expense",
+    "amount": 9.99,
+    "date": 1593354669000,
+    "category": "transportation"
+  },
+  {
+    "id": "c39344ae-2ad9-49bd-b8cd-40ef90f46c93",
+    "type": "income",
+    "amount": 40,
+    "date": 1590969602000,
+    "category": "gift"
+  },
+  {
+    "id": "43619b08-2f81-460e-b522-8064f7f3e7d0",
+    "type": "income",
+    "amount": 1500,
+    "date": 1590969600000,
+    "category": "paycheck"
+  },
+
+  {
+    "id": "a40857c0-55a8-4d9e-8294-8c3c3bd335c4",
+    "type": "expense",
+    "amount": 130.23,
+    "date": 1590969601000,
+    "category": "groceries"
+  }
+]
