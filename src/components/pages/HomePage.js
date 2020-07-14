@@ -42,6 +42,7 @@ export default class HomePage extends React.Component {
       date: Date.now(),
       allTransactions: transactions,
       displayedTransactions: [],
+      //user
     };
   }
   incrementMonth() {
@@ -72,12 +73,13 @@ export default class HomePage extends React.Component {
     return (
       <>
         <div></div>
-        <Window style={{ width: 700 }}>
+        <Window style={{ width: 700, backgroundColor: "#cdcece" }}>
           <WindowHeader
             style={{
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
+              backgroundColor: "#003788",
             }}
           >
             {toDisplayDate(this.state.date, "yyyy")}
@@ -93,15 +95,37 @@ export default class HomePage extends React.Component {
               </span>
             </Button>
           </WindowHeader>
-          <Window>
+          <Window style={{ backgroundColor: "#cdcece" }}>
+            <WindowHeader
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                backgroundColor: "#003788",
+              }}
+            >
+              you can do it!!
+              <Button
+                style={{ marginRight: "-6px", marginTop: "1px" }}
+                size={"sm"}
+                square
+              >
+                <span
+                  style={{ fontWeight: "bold", transform: "translateY(-1px)" }}
+                >
+                  x
+                </span>
+              </Button>
+            </WindowHeader>
             <WindowContent>
-              <Fieldset style={{ width: 250 }}>
+              <Fieldset style={{ width: 250, backgroundColor: "#FFFFFF" }}>
                 <img src={logo} alt="" />
               </Fieldset>
             </WindowContent>
           </Window>
 
           <WindowContent>
+            <Button> RECORD ENTRY </Button>
             <div style={{ display: "flex", alignItems: "center" }}>
               <span onClick={() => this.decrementMonth()}>
                 <img src={LeftArrow} width="30px" alt="" />
@@ -113,8 +137,8 @@ export default class HomePage extends React.Component {
                 <img src={RightArrow} width="30px" alt="" />
               </span>
             </div>
-            <Button> RECORD ENTRY </Button>
-            <Table>
+
+            <Table style={{ backgroundColor: "#FFFFFF" }}>
               <TableHead>
                 <TableRow head>
                   <TableHeadCell style={{ width: 150 }}>date</TableHeadCell>
