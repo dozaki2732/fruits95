@@ -6,6 +6,7 @@ import {
   WindowContent,
   Toolbar,
   TextArea,
+  TextField,
 } from "react95";
 import { withRouter } from "react-router-dom";
 import { v4 as getUuid } from "uuid";
@@ -155,7 +156,7 @@ class Login extends React.Component {
                     Email address
                   </label>
 
-                  <TextArea
+                  <TextField
                     type="email"
                     id="email-input"
                     className={classnames({
@@ -172,7 +173,7 @@ class Login extends React.Component {
                 <label className="input-text text-muted" htmlFor="password">
                   Password
                 </label>
-                <TextArea
+                <TextField
                   type="password"
                   id="password-input"
                   className={classnames({

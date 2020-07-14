@@ -5,7 +5,7 @@ import {
   Button,
   WindowContent,
   NumberField,
-  DatePicker,
+  TextField,
   Select,
 } from "react95";
 import transactions from "../mock-data/transactions";
@@ -17,6 +17,13 @@ export default class HomePage extends React.Component {
       isDisplayingDatePicker: false,
     };
   }
+
+  displayDatePicker() {
+    this.setState({
+      isDisplayingDatePicker: true,
+    });
+  }
+
   render() {
     return (
       <>
@@ -28,7 +35,7 @@ export default class HomePage extends React.Component {
               justifyContent: "space-between",
             }}
           >
-            <h2>Record Entry (*＾▽＾)／ </h2>
+            <h2>Record Entry (*＾▽＾) </h2>
             <Button
               style={{ marginRight: "-6px", marginTop: "1px" }}
               size={"sm"}
@@ -44,9 +51,10 @@ export default class HomePage extends React.Component {
           <WindowContent>
             <p>amount</p>
             <NumberField value={10} onChange={(value) => console.log(value)} />
-            <Button>Date</Button>
-            <DatePicker onAccept={(date) => console.log(date)} />
-            <p> category</p>
+            <div>
+              <label htmlFor="email">Date</label>
+              <TextField type="email" />
+            </div>
             <Select
               items={transactions.filter((transaction) => transaction.category)}
               width={150}

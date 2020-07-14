@@ -1,5 +1,11 @@
 import React from "react";
-import { Window, WindowHeader, Button, WindowContent, Bar } from "react95";
+import {
+  Window,
+  WindowHeader,
+  Button,
+  WindowContent,
+  TextField,
+} from "react95";
 import { withRouter } from "react-router-dom";
 import { v4 as getUuid } from "uuid";
 import hash from "object-hash";
@@ -127,7 +133,7 @@ class SignUp extends React.Component {
                     Email address
                   </label>
 
-                  <input
+                  <TextField
                     type="email"
                     id="email-input"
                     className={classnames({
@@ -144,7 +150,7 @@ class SignUp extends React.Component {
                 <label className="input-text text-muted" htmlFor="password">
                   Password
                 </label>
-                <input
+                <TextField
                   type="password"
                   id="password-input"
                   className={classnames({
