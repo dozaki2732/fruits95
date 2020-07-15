@@ -101,7 +101,7 @@ class HomePage extends React.Component {
               </span>
             </Button>
           </WindowHeader>
-          <Window style={{ backgroundColor: "#cdcece" }}>
+          <Window style={{ backgroundColor: "#cdcece", marginTop: "25px" }}>
             <WindowHeader
               style={{
                 display: "flex",
