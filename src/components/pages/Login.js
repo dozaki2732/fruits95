@@ -13,6 +13,7 @@ import { v4 as getUuid } from "uuid";
 import hash from "object-hash";
 import classnames from "classnames";
 import SignUp from "../ui/SignUp";
+import warning from "../../style/icons/msg_warning-0.png";
 
 class Login extends React.Component {
   constructor(props) {
@@ -159,13 +160,15 @@ class Login extends React.Component {
                   <TextField
                     type="email"
                     id="email-input"
-                    className={classnames({
-                      "form-control": true,
-                      "is-invalid": this.state.hasEmailError,
-                    })}
+                    style={{ marginBottom: "20px" }}
                   />
-                  {this.state.hasEmailError !== "" && (
-                    <p className="text-danger">{this.state.emailError}</p>
+                  {this.state.hasEmailError && (
+                    <div>
+                      <p className="text-danger">
+                        {this.state.emailError}
+                        <img src={warning} alt="" />
+                      </p>
+                    </div>
                   )}
                 </div>
               </div>
@@ -176,14 +179,15 @@ class Login extends React.Component {
                 <TextField
                   type="password"
                   id="password-input"
-                  className={classnames({
-                    "form-control": true,
-                    "mb-2": true,
-                    "is-invalid": this.state.hasPasswordError,
-                  })}
+                  style={{ marginBottom: "20px" }}
                 />
                 {this.state.hasPasswordError && (
-                  <p className="text-danger">{this.state.passwordError}</p>
+                  <div style={{}}>
+                    <p className="text-danger">
+                      {this.state.passwordError}
+                      <img src={warning} alt="" />
+                    </p>
+                  </div>
                 )}
               </div>
               <Button

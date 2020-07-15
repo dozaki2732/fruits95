@@ -8,6 +8,6 @@ const initialState = {
   displayedTransactions: [],
 };
 
-const store = createStore(rootReducer, initialState, composeWithDevTools());
+const store = createStore(combineReducers, initialState, composeWithDevTools());
 
 export default store;

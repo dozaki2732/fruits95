@@ -7,6 +7,8 @@ import RightArrow from "../../style/icons/chevron-right.svg";
 import LeftArrow from "../../style/icons/chevron-left.svg";
 import axios from "axios";
 import logo from "../../style/icons/d02a9595-3a45-483c-8632-25d4c32d9530_200x200.png";
+import { connect } from "react-redux";
+import actions from "../../store/actions";
 
 import {
   Window,
@@ -22,16 +24,20 @@ import {
   Fieldset,
 } from "react95";
 
-export default class HomePage extends React.Component {
+class HomePage extends React.Component {
   constructor(props) {
     super(props);
     axios
       .get(
         "https://raw.githubusercontent.com/dozaki2732/fruits95/master/src/components/mock-data/transactions.json?token=APJWHCEAFYGNLLPS3GZNKOS7BTYT6"
       )
-      .then(function (response) {
+      .then(function (res) {
         // handle success
-        console.log(response);
+        console.log(res);
+        props.dispatch({
+          type: actions.DISPLAY_TRANSACTIONS,
+          payload: res.data,
+        });
       })
       .catch(function (error) {
         // handle error
@@ -79,7 +85,7 @@ export default class HomePage extends React.Component {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              backgroundColor: "#003788",
+              backgroundColor: "#004498",
             }}
           >
             {toDisplayDate(this.state.date, "yyyy")}
@@ -104,7 +110,7 @@ export default class HomePage extends React.Component {
                 backgroundColor: "#003788",
               }}
             >
-              you can do it!!
+              <h3>you can do it!! </h3>
               <Button
                 style={{ marginRight: "-6px", marginTop: "1px" }}
                 size={"sm"}
@@ -141,7 +147,7 @@ export default class HomePage extends React.Component {
             <Table style={{ backgroundColor: "#FFFFFF" }}>
               <TableHead>
                 <TableRow head>
-                  <TableHeadCell style={{ width: 150 }}>date</TableHeadCell>
+                  <TableHeadCell>date</TableHeadCell>
                   <TableHeadCell>Category</TableHeadCell>
                   <TableHeadCell>amount </TableHeadCell>
                 </TableRow>
@@ -172,3 +178,11 @@ export default class HomePage extends React.Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    displayedTransactions: state.displayedTransactions,
+  };
+}
+
+export default connect(mapStateToProps)(HomePage);
