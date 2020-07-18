@@ -5,15 +5,14 @@ import {
   Button,
   WindowContent,
   Toolbar,
-  TextArea,
   TextField,
 } from "react95";
 import { withRouter } from "react-router-dom";
 import { v4 as getUuid } from "uuid";
 import hash from "object-hash";
-import classnames from "classnames";
 import SignUp from "../ui/SignUp";
-import warning from "../../style/icons/msg_warning-0.png";
+import warning from "../../style/icons/warning.png";
+import "../../style/style.css";
 
 class Login extends React.Component {
   constructor(props) {
@@ -112,7 +111,7 @@ class Login extends React.Component {
   render() {
     return (
       <div>
-        <Window style={{ width: 400 }}>
+        <Window classname="windowColoring" style={{ width: 400 }}>
           <WindowHeader
             style={{
               display: "flex",

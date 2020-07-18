@@ -4,8 +4,10 @@ import combineReducers from "./combineReducers";
 
 const initialState = {
   user: {},
-  transactions: [],
-  displayedTransactions: [],
+  transactions: {
+    allTransactions: [],
+    displayedTransactions: [],
+  },
 };
 
 const store = createStore(combineReducers, initialState, composeWithDevTools());

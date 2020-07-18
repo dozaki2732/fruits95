@@ -1,10 +1,12 @@
 import actions from "../actions";
 
-export default function transactions(state = [], action) {
+export default function transactions(transactions = {}, action) {
+  let newTransactions = { ...transactions };
   switch (action.type) {
-    case actions.STORE_TRANSACTIONS:
-      return action.payload;
+    case actions.STORE_ALL_TRANSACTIONS:
+      newTransactions = action.payload;
+      return newTransactions;
     default:
-      return state;
+      return transactions;
   }
 }

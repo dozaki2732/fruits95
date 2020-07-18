@@ -1,5 +1,4 @@
 import React from "react";
-import transactions from "../mock-data/transactions";
 import addDate from "date-fns/add";
 import subtractDate from "date-fns/sub";
 import toDisplayDate from "date-fns/format";
@@ -9,6 +8,8 @@ import axios from "axios";
 import logo from "../../style/icons/d02a9595-3a45-483c-8632-25d4c32d9530_200x200.png";
 import { connect } from "react-redux";
 import actions from "../../store/actions";
+import "../../style/style.css";
+import recordEntryIcon from "../../style/icons/recordEntry.png";
 
 import {
   Window,
@@ -22,35 +23,40 @@ import {
   Button,
   WindowContent,
   Fieldset,
+  Toolbar,
 } from "react95";
 
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      date: Date.now(),
+      allTransactions: [],
+      displayedTransactions: [],
+      //   displayedTotalIncome: 0,
+      //   displayedTotalExpenses: 0,
+      //user
+    };
     axios
       .get(
-        "https://raw.githubusercontent.com/dozaki2732/fruits95/master/src/components/mock-data/transactions.json?token=APJWHCEAFYGNLLPS3GZNKOS7BTYT6"
+        "https://raw.githubusercontent.com/dozaki2732/fruits95/master/src/components/mock-data/transactions.json"
       )
-      .then(function (res) {
+      .then((res) => {
         // handle success
-        console.log(res);
+        console.log(res.data);
         props.dispatch({
-          type: actions.DISPLAY_TRANSACTIONS,
+          type: actions.STORE_ALL_TRANSACTIONS,
           payload: res.data,
         });
       })
-      .catch(function (error) {
+      .catch((error) => {
         // handle error
         console.log(error);
       });
-
-    this.state = {
-      date: Date.now(),
-      allTransactions: transactions,
-      displayedTransactions: [],
-      //user
-    };
   }
+
+  //functions
+
   incrementMonth() {
     const newDate = addDate(this.state.date, { months: 1 });
     this.setState({ date: newDate }, () => {
@@ -64,8 +70,11 @@ class HomePage extends React.Component {
       this.setDisplayedTransactions();
     });
   }
+
   setDisplayedTransactions() {
-    const transactions = [...this.state.allTransactions];
+    const transactions = [...this.props.transactions];
+    console.log("these are the transaction youre looking for", transactions);
+
     const filteredTransactions = transactions.filter((transaction) => {
       const selectedYearMonth = toDisplayDate(this.state.date, "yyyyMM");
       const transactionYearMonth = toDisplayDate(transaction.date, "yyyyMM");
@@ -75,10 +84,15 @@ class HomePage extends React.Component {
     this.setState({ displayedTransactions: filteredTransactions });
   }
 
+  //
+  //render
+  //
   render() {
+    const transactions = this.props.transactions;
+    console.log("found it", transactions);
+
     return (
-      <>
-        <div></div>
+      <div className="home-page-bg">
         <Window style={{ width: 700, backgroundColor: "#cdcece" }}>
           <WindowHeader
             style={{
@@ -101,6 +115,50 @@ class HomePage extends React.Component {
               </span>
             </Button>
           </WindowHeader>
+          <Toolbar>
+            <Button
+              style={{ backgroundColor: "#cdcece" }}
+              variant="menu"
+              size="sm"
+            >
+              logout
+            </Button>
+          </Toolbar>
+
+          <Window style={{ backgroundColor: "#cdcece", marginTop: "25px" }}>
+            <WindowHeader
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+                backgroundColor: "#003788",
+              }}
+            >
+              <h3>you can do it!! </h3>
+              <Button
+                style={{ marginRight: "-6px", marginTop: "1px" }}
+                size={"sm"}
+                square
+              >
+                <span
+                  style={{ fontWeight: "bold", transform: "translateY(-1px)" }}
+                >
+                  x
+                </span>
+              </Button>
+            </WindowHeader>
+            <WindowContent>
+              {/* {transactions.map((transaction) => {
+                return (
+                  <div>
+                    <h2>{transaction.category}</h2>
+                  </div>
+                );
+              })} */}
+            </WindowContent>
+          </Window>
+
+          {/* logo window  */}
           <Window style={{ backgroundColor: "#cdcece", marginTop: "25px" }}>
             <WindowHeader
               style={{
@@ -130,8 +188,17 @@ class HomePage extends React.Component {
             </WindowContent>
           </Window>
 
+          <h2> {} </h2>
+
           <WindowContent>
-            <Button> RECORD ENTRY </Button>
+            <figure>
+              <img src={recordEntryIcon} alt="" />
+              <figcaption>RECORD ENTRY</figcaption>
+            </figure>
+
+            <Button> CASH FLOW </Button>
+            <Button> TOTAL INCOME </Button>
+            <Button> TOTAL EXPENSES </Button>
             <div style={{ display: "flex", alignItems: "center" }}>
               <span onClick={() => this.decrementMonth()}>
                 <img src={LeftArrow} width="30px" alt="" />
@@ -153,7 +220,7 @@ class HomePage extends React.Component {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {this.state.displayedTransactions.map((transaction) => {
+                {/* {transactions.map((transaction) => {
                   return (
                     <>
                       <TableRow>
@@ -169,19 +236,19 @@ class HomePage extends React.Component {
                       </TableRow>
                     </>
                   );
-                })}
+                })} */}
               </TableBody>
             </Table>
           </WindowContent>
         </Window>
-      </>
+      </div>
     );
   }
 }
 
 function mapStateToProps(state) {
   return {
-    displayedTransactions: state.displayedTransactions,
+    transactions: state.transactions,
   };
 }
 

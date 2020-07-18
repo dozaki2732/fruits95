@@ -140,5 +140,19 @@
     "amount": 130.23,
     "date": 1590969601000,
     "category": "groceries"
+  },
+  {
+    "id": "5081b010-b17a-4fbc-b9bb-b273ef0f0fbf",
+    "type": "expense",
+    "amount": 143,
+    "date": 1593573204000,
+    "category": "transportation"
+  },
+  {
+    "id": "440a344d-7e3a-4228-b4cf-f8a0dcc282af",
+    "type": "income",
+    "amount": 2500,
+    "date": 1593832404000,
+    "category": "paycheck"
   }
 ]
