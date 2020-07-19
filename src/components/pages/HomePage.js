@@ -12,6 +12,7 @@ import "../../style/style.css";
 import recordEntryIcon from "../../style/icons/recordEntry.png";
 import totalIncomeIcon from "../../style/icons/totalIncomeIcon.png";
 import totalExpenseIcon from "../../style/icons/totalExpenseIcon.png";
+import SmallWindow from "../../components/ui/SmallWindow";
 
 import {
   Window,
@@ -35,8 +36,9 @@ class HomePage extends React.Component {
       date: Date.now(),
       allTransactions: [],
       displayedTransactions: [],
-      //   displayedTotalIncome: 0,
-      //   displayedTotalExpenses: 0,
+      isDisplayingTotalExpenseWindow: false,
+      isDisplayingTotalIncomeWindow: false,
+
       //user
     };
     axios
@@ -58,6 +60,17 @@ class HomePage extends React.Component {
   }
 
   //functions
+
+  displayTotalExpenseWindow() {
+    this.setState({
+      isDisplayingTotalExpenseWindow: true,
+    });
+  }
+  displayTotalIncomeWindow() {
+    this.setState({
+      isDisplayingTotalIncomeWindow: true,
+    });
+  }
 
   incrementMonth() {
     const newDate = addDate(this.state.date, { months: 1 });
@@ -86,22 +99,34 @@ class HomePage extends React.Component {
     this.setState({ displayedTransactions: filteredTransactions });
   }
 
-  //
-  //render
-  //
+  gettingTotalExpenses() {
+    const transactions = [...this.props.transactions];
+    const filteredTransactions = transactions.filter((transaction) => {
+      const selectedYearMonth = toDisplayDate(this.state.date, "yyyyMM");
+      const transactionYearMonth = toDisplayDate(transaction.date, "yyyyMM");
+      //want it to look like "202007"
+      return selectedYearMonth === transactionYearMonth;
+    });
+
+    const totalExpense = filteredTransactions.filter((transaction) => {
+      if (transaction.type === "expense") return transaction.amount;
+    });
+    this.setState({ displayedTotalExpenses: totalExpense });
+  }
+
   render() {
-    const transactions = this.props.transactions;
-    console.log("found it", transactions);
+    // const transactions = this.props.transactions[3];
+    // console.log("found it", transactions);
 
     return (
       <div className="home-page-bg">
         <Window className="windowColoring" style={{ width: 700 }}>
           <WindowHeader
+            className="windowTopBar"
             style={{
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              backgroundColor: "#004498",
             }}
           >
             {toDisplayDate(this.state.date, "yyyy")}
@@ -127,47 +152,14 @@ class HomePage extends React.Component {
             </Button>
           </Toolbar>
 
-          <Window style={{ backgroundColor: "#cdcece", marginTop: "25px" }}>
-            <WindowHeader
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "space-between",
-                backgroundColor: "#003788",
-              }}
-            >
-              <h3>you can do it!! </h3>
-              <Button
-                style={{ marginRight: "-6px", marginTop: "1px" }}
-                size={"sm"}
-                square
-              >
-                <span
-                  style={{ fontWeight: "bold", transform: "translateY(-1px)" }}
-                >
-                  x
-                </span>
-              </Button>
-            </WindowHeader>
-            <WindowContent>
-              {/* {transactions.map((transaction) => {
-                return (
-                  <div>
-                    <h2>{transaction.category}</h2>
-                  </div>
-                );
-              })} */}
-            </WindowContent>
-          </Window>
-
           {/* logo window  */}
           <Window style={{ backgroundColor: "#cdcece", marginTop: "25px" }}>
             <WindowHeader
+              className="windowTopBar"
               style={{
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "space-between",
-                backgroundColor: "#003788",
               }}
             >
               <h3>you can do it!! </h3>
@@ -190,7 +182,7 @@ class HomePage extends React.Component {
             </WindowContent>
           </Window>
 
-          <h2> {} </h2>
+          <h2> testing </h2>
 
           {/* BUTTONS TO DISPLAY DATA  */}
 
@@ -200,13 +192,39 @@ class HomePage extends React.Component {
               <figcaption>RECORD ENTRY</figcaption>
             </figure>
             <figure>
-              <img src={totalIncomeIcon} alt="" />
+              <img
+                src={totalIncomeIcon}
+                alt=""
+                onClick={() => {
+                  this.displayTotalIncomeWindow();
+                }}
+              />
               <figcaption>TOTAL INCOME </figcaption>
             </figure>
+            {this.state.isDisplayingTotalIncomeWindow && (
+              <div>
+                <SmallWindow />
+              </div>
+            )}
             <figure>
-              <img src={totalExpenseIcon} alt="" />
+              <img
+                src={totalExpenseIcon}
+                alt=""
+                onClick={() => {
+                  this.displayTotalExpenseWindow();
+                }}
+              />
               <figcaption>TOTAL EXPENSE </figcaption>
             </figure>
+
+            {this.state.isDisplayingTotalExpenseWindow && (
+              <div>
+                <SmallWindow />
+              </div>
+            )}
+
+            {/* displaying month name and toggle buttons */}
+
             <div style={{ display: "flex", alignItems: "center" }}>
               <span onClick={() => this.decrementMonth()}>
                 <img src={LeftArrow} width="30px" alt="" />
@@ -228,7 +246,7 @@ class HomePage extends React.Component {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {/* {transactions.map((transaction) => {
+                {this.state.displayedTransactions.map((transaction) => {
                   return (
                     <>
                       <TableRow>
@@ -244,7 +262,7 @@ class HomePage extends React.Component {
                       </TableRow>
                     </>
                   );
-                })} */}
+                })}
               </TableBody>
             </Table>
           </WindowContent>

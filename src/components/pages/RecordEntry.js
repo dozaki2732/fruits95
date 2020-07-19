@@ -27,8 +27,9 @@ export default class HomePage extends React.Component {
   render() {
     return (
       <>
-        <Window style={{ width: 400 }}>
+        <Window className="windowColoring" style={{ width: 400 }}>
           <WindowHeader
+            className="windowTopBar"
             style={{
               display: "flex",
               alignItems: "center",
@@ -50,12 +51,20 @@ export default class HomePage extends React.Component {
           </WindowHeader>
           <WindowContent>
             <p>amount</p>
-            <NumberField value={10} onChange={(value) => console.log(value)} />
+            <NumberField
+              style={{ backgroundColor: "white", marginBottom: 50 }}
+              value={10}
+              onChange={(value) => console.log(value)}
+            />
             <div>
               <label htmlFor="email">Date</label>
-              <TextField type="email" />
+              <TextField
+                style={{ backgroundColor: "white", marginBottom: 50 }}
+                type="email"
+              />
             </div>
             <Select
+              style={{ backgroundColor: "white" }}
               items={transactions.filter((transaction) => transaction.category)}
               width={150}
             />
