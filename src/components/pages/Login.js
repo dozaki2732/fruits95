@@ -111,8 +111,9 @@ class Login extends React.Component {
   render() {
     return (
       <div>
-        <Window classname="windowColoring" style={{ width: 400 }}>
+        <Window className="windowColoring" style={{ width: 400 }}>
           <WindowHeader
+            className="windowTopBar"
             style={{
               display: "flex",
               alignItems: "center",
@@ -132,7 +133,7 @@ class Login extends React.Component {
               </span>
             </Button>
           </WindowHeader>
-          <Toolbar>
+          <Toolbar className="windowColoring">
             {!this.state.isDisplayingSignUp && (
               <Button
                 variant="menu"
@@ -157,15 +158,20 @@ class Login extends React.Component {
                   </label>
 
                   <TextField
+                    className="white"
                     type="email"
                     id="email-input"
-                    style={{ marginBottom: "20px" }}
+                    style={{ marginBottom: "20px", marginTop: 5 }}
                   />
                   {this.state.hasEmailError && (
                     <div>
                       <p className="text-danger">
                         {this.state.emailError}
-                        <img src={warning} alt="" />
+                        <img
+                          src={warning}
+                          alt=""
+                          style={{ width: 25, marginLeft: 10 }}
+                        />
                       </p>
                     </div>
                   )}
@@ -176,20 +182,26 @@ class Login extends React.Component {
                   Password
                 </label>
                 <TextField
+                  className="white"
                   type="password"
                   id="password-input"
-                  style={{ marginBottom: "20px" }}
+                  style={{ marginBottom: "20px", marginTop: 5 }}
                 />
                 {this.state.hasPasswordError && (
                   <div style={{}}>
                     <p className="text-danger">
                       {this.state.passwordError}
-                      <img src={warning} alt="" />
+                      <img
+                        src={warning}
+                        alt=""
+                        style={{ width: 25, marginLeft: 10 }}
+                      />
                     </p>
                   </div>
                 )}
               </div>
               <Button
+                style={{ width: 100 }}
                 onClick={() => {
                   this.validateAndCreateUser();
                 }}

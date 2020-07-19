@@ -102,8 +102,9 @@ class SignUp extends React.Component {
   render() {
     return (
       <div>
-        <Window style={{ width: 400 }}>
+        <Window className="windowColoring" style={{ width: 400 }}>
           <WindowHeader
+            className="windowTopBar"
             style={{
               display: "flex",
               alignItems: "center",
@@ -134,12 +135,9 @@ class SignUp extends React.Component {
                   </label>
 
                   <TextField
+                    style={{ backgroundColor: "white", marginTop: 10 }}
                     type="email"
                     id="email-input"
-                    className={classnames({
-                      "form-control": true,
-                      "is-invalid": this.state.hasEmailError,
-                    })}
                   />
                   {this.state.hasEmailError !== "" && (
                     <p className="text-danger">{this.state.emailError}</p>
@@ -151,19 +149,16 @@ class SignUp extends React.Component {
                   Password
                 </label>
                 <TextField
+                  style={{ backgroundColor: "white", marginTop: 10 }}
                   type="password"
                   id="password-input"
-                  className={classnames({
-                    "form-control": true,
-                    "mb-2": true,
-                    "is-invalid": this.state.hasPasswordError,
-                  })}
                 />
                 {this.state.hasPasswordError && (
                   <p className="text-danger">{this.state.passwordError}</p>
                 )}
               </div>
               <Button
+                style={{ marginTop: 20, width: 355 }}
                 onClick={() => {
                   this.validateAndCreateUser();
                 }}

@@ -10,6 +10,8 @@ import { connect } from "react-redux";
 import actions from "../../store/actions";
 import "../../style/style.css";
 import recordEntryIcon from "../../style/icons/recordEntry.png";
+import totalIncomeIcon from "../../style/icons/totalIncomeIcon.png";
+import totalExpenseIcon from "../../style/icons/totalExpenseIcon.png";
 
 import {
   Window,
@@ -93,7 +95,7 @@ class HomePage extends React.Component {
 
     return (
       <div className="home-page-bg">
-        <Window style={{ width: 700, backgroundColor: "#cdcece" }}>
+        <Window className="windowColoring" style={{ width: 700 }}>
           <WindowHeader
             style={{
               display: "flex",
@@ -190,15 +192,21 @@ class HomePage extends React.Component {
 
           <h2> {} </h2>
 
+          {/* BUTTONS TO DISPLAY DATA  */}
+
           <WindowContent>
             <figure>
               <img src={recordEntryIcon} alt="" />
               <figcaption>RECORD ENTRY</figcaption>
             </figure>
-
-            <Button> CASH FLOW </Button>
-            <Button> TOTAL INCOME </Button>
-            <Button> TOTAL EXPENSES </Button>
+            <figure>
+              <img src={totalIncomeIcon} alt="" />
+              <figcaption>TOTAL INCOME </figcaption>
+            </figure>
+            <figure>
+              <img src={totalExpenseIcon} alt="" />
+              <figcaption>TOTAL EXPENSE </figcaption>
+            </figure>
             <div style={{ display: "flex", alignItems: "center" }}>
               <span onClick={() => this.decrementMonth()}>
                 <img src={LeftArrow} width="30px" alt="" />
