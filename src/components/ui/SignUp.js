@@ -10,7 +10,9 @@ import {
 import { withRouter } from "react-router-dom";
 import { v4 as getUuid } from "uuid";
 import hash from "object-hash";
-import classnames from "classnames";
+import { connect } from "react-redux";
+import actions from "../../store/actions";
+import axios from "axios";
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -96,6 +98,22 @@ class SignUp extends React.Component {
         createdAt: Date.now(),
       };
       console.log(user);
+      axios
+        .get(
+          "https://github.com/dozaki2732/fruits95/blob/master/src/components/mock-data/user.json"
+        )
+        .then((res) => {
+          const currentUser = res.data;
+          console.log(currentUser);
+          this.props.dispatch({
+            type: actions.UPDATE_CURRENT_USER,
+            payload: res.data,
+          });
+        })
+        .catch((error) => {
+          // handle error
+          console.log(error);
+        });
       this.props.history.push("/home-page");
     }
   }
@@ -140,7 +158,7 @@ class SignUp extends React.Component {
                     type="email"
                     id="email-input"
                   />
-                  {this.state.hasEmailError != "" && (
+                  {this.state.hasEmailError !== "" && (
                     <div>
                       <p style={{ color: "red" }}>{this.state.emailError}</p>
                       <img
@@ -188,4 +206,8 @@ class SignUp extends React.Component {
   }
 }
 
-export default withRouter(SignUp);
+function mapStateToProps(state) {
+  return {};
+}
+
+export default withRouter(connect(mapStateToProps)(SignUp));

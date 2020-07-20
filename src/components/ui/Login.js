@@ -10,9 +10,12 @@ import {
 import { withRouter } from "react-router-dom";
 import { v4 as getUuid } from "uuid";
 import hash from "object-hash";
-import SignUp from "../ui/SignUp";
+import SignUp from "./SignUp";
 import warning from "../../style/icons/warning.png";
 import "../../style/style.css";
+import { connect } from "react-redux";
+import actions from "../../store/actions";
+import axios from "axios";
 
 class Login extends React.Component {
   constructor(props) {
@@ -29,15 +32,6 @@ class Login extends React.Component {
     this.setState({
       isDisplayingSignUp: true,
     });
-  }
-
-  checkHasLocalPart(passwordInput, emailInput) {
-    const localPart = emailInput.split("@")[0];
-    console.log(localPart);
-    if (localPart === "") return false;
-    else if (localPart.length < 4) return false;
-    else return passwordInput.includes(localPart);
-    //.includes will return a true or false
   }
 
   async setEmailState(emailInput) {
@@ -67,28 +61,12 @@ class Login extends React.Component {
         passwordError: "Please create a password.",
         hasPasswordError: true,
       });
-    } else if (passwordInput.length < 9) {
-      this.setState({
-        passwordError: "Your password must be at least 9 characters.",
-        hasPasswordError: true,
-      });
-    } else if (this.checkHasLocalPart(passwordInput, emailInput)) {
-      this.setState({
-        passwordError:
-          "FOR YOUR SAFETY, Your password cannot contain your email address.",
-        hasPasswordError: true,
-      });
-    } else if (uniqChars.length < 3) {
-      this.setState({
-        passwordError: "password must containe at least 3 unique characters",
-        hasPasswordError: true,
-      });
     } else {
       this.setState({ passwordError: "", hasPasswordError: false });
     }
   }
 
-  async validateAndCreateUser() {
+  async validateAndLogUser() {
     const emailInput = document.getElementById("email-input").value;
     const passwordInput = document.getElementById("password-input").value;
     await this.setEmailState(emailInput);
@@ -106,7 +84,9 @@ class Login extends React.Component {
       console.log("created user object for POST", user);
       //mimic api response
       axios
-        .get("")
+        .get(
+          "https://github.com/dozaki2732/fruits95/blob/master/src/components/mock-data/user.json"
+        )
         .then((res) => {
           const currentUser = res.data;
           console.log(currentUser);
@@ -218,7 +198,7 @@ class Login extends React.Component {
               <Button
                 style={{ width: 100 }}
                 onClick={() => {
-                  this.validateAndCreateUser();
+                  this.validateAndLogUser();
                 }}
               >
                 Log in
@@ -230,5 +210,8 @@ class Login extends React.Component {
     );
   }
 }
+function mapStateToProps(state) {
+  return {};
+}
 
-export default withRouter(Login);
+export default withRouter(connect(mapStateToProps)(Login));
