@@ -7,8 +7,10 @@ import {
   NumberField,
   TextField,
   Select,
+  Toolbar,
 } from "react95";
 import transactions from "../mock-data/transactions";
+import { Link } from "react-router-dom";
 
 export default class HomePage extends React.Component {
   constructor(props) {
@@ -49,6 +51,17 @@ export default class HomePage extends React.Component {
               </span>
             </Button>
           </WindowHeader>
+          <Toolbar>
+            <Link to="/home-page">
+              <Button
+                style={{ backgroundColor: "#cdcece" }}
+                variant="menu"
+                size="sm"
+              >
+                back
+              </Button>
+            </Link>
+          </Toolbar>
           <WindowContent>
             <p>amount</p>
             <NumberField

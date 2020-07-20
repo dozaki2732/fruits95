@@ -13,6 +13,7 @@ import recordEntryIcon from "../../style/icons/recordEntry.png";
 import totalIncomeIcon from "../../style/icons/totalIncomeIcon.png";
 import totalExpenseIcon from "../../style/icons/totalExpenseIcon.png";
 import SmallWindow from "../../components/ui/SmallWindow";
+import { Link } from "react-router-dom";
 
 import {
   Window,
@@ -38,6 +39,7 @@ class HomePage extends React.Component {
       displayedTransactions: [],
       isDisplayingTotalExpenseWindow: false,
       isDisplayingTotalIncomeWindow: false,
+      displayedTotalExpenses: [],
 
       //user
     };
@@ -48,10 +50,10 @@ class HomePage extends React.Component {
       .then((res) => {
         // handle success
         console.log(res.data);
-        // props.dispatch({
-        //   type: actions.STORE_ALL_TRANSACTIONS,
-        //   payload: res.data,
-        // });
+        props.dispatch({
+          type: actions.STORE_ALL_TRANSACTIONS,
+          payload: res.data,
+        });
         this.setState({
           allTransactions: res.data,
           displayedTransactions: res.data,
@@ -64,6 +66,12 @@ class HomePage extends React.Component {
   }
 
   //functions
+  logOutCurrentUser() {
+    this.props.dispatch({
+      type: actions.UPDATE_CURRENT_USER,
+      payload: {},
+    });
+  }
 
   displayTotalExpenseWindow() {
     this.setState({
@@ -91,44 +99,36 @@ class HomePage extends React.Component {
   }
 
   setDisplayedTransactions() {
-    this.props.dispatch({
-      type: actions.DISPLAY_TRANSACTIONS,
+    const transactions = [...this.props.transactions];
+    console.log("these are the transaction youre looking for", transactions);
+
+    const filteredTransactions = transactions.filter((transaction) => {
+      const selectedYearMonth = toDisplayDate(this.state.date, "yyyyMM");
+      const transactionYearMonth = toDisplayDate(transaction.date, "yyyyMM");
+      //want it to look like "202007"
+      return selectedYearMonth === transactionYearMonth;
     });
-
-    // const transactions = [...this.props.transactions];
-    // console.log("these are the transaction youre looking for", transactions);
-
-    // const filteredTransactions = transactions.filter((transaction) => {
-    //   const selectedYearMonth = toDisplayDate(this.state.date, "yyyyMM");
-    //   const transactionYearMonth = toDisplayDate(transaction.date, "yyyyMM");
-    //   //want it to look like "202007"
-    //   return selectedYearMonth === transactionYearMonth;
-    // });
-    // this.setState({ displayedTransactions: filteredTransactions });
+    this.setState({ displayedTransactions: filteredTransactions });
   }
 
-  //   gettingTotalExpenses() {
-  //     const transactions = [...this.props.transactions];
-  //     const filteredTransactions = transactions.filter((transaction) => {
-  //       const selectedYearMonth = toDisplayDate(this.state.date, "yyyyMM");
-  //       const transactionYearMonth = toDisplayDate(transaction.date, "yyyyMM");
-  //       //want it to look like "202007"
-  //       return selectedYearMonth === transactionYearMonth;
-  //     });
+  gettingTotalExpenses() {
+    const transactions = [...this.props.transactions];
+    const filteredTransactions = transactions.filter((transaction) => {
+      const selectedYearMonth = toDisplayDate(this.state.date, "yyyyMM");
+      const transactionYearMonth = toDisplayDate(transaction.date, "yyyyMM");
+      //want it to look like "202007"
+      return selectedYearMonth === transactionYearMonth;
+    });
 
-  //     const totalExpense = filteredTransactions.filter((transaction) => {
-  //       if (transaction.type === "expense") return transaction.amount;
-  //     });
-  //     this.setState({ displayedTotalExpenses: totalExpense });
-  //   }
+    const totalExpenseArray = filteredTransactions.filter(
+      (transaction) => (transaction.type = "expense")
+    );
+    // if (totalExpenseArray.type ===)
+    console.log("thru");
+    console.log(totalExpenseArray);
 
-  //   setOrder(e) {
-  //     const newOrder = e.target.value;
-  //     console.log(newOrder); //"['totalSuccessfulAttempts',' createdAt'], ['desc', 'desc']"
-  //     this.setState({ order: newOrder }, () => {
-  //       this.setMemoryCards();
-  //     });
-  //   }
+    this.setState({ displayedTotalExpenses: totalExpenseArray });
+  }
 
   render() {
     // const transactions = this.props.transactions[3];
@@ -159,13 +159,18 @@ class HomePage extends React.Component {
             </Button>
           </WindowHeader>
           <Toolbar>
-            <Button
-              style={{ backgroundColor: "#cdcece" }}
-              variant="menu"
-              size="sm"
-            >
-              logout
-            </Button>
+            <Link to="/">
+              <Button
+                style={{ backgroundColor: "#cdcece" }}
+                variant="menu"
+                size="sm"
+                onClick={() => {
+                  this.logOutCurrentUser();
+                }}
+              >
+                logout
+              </Button>
+            </Link>
             <Button
               style={{ backgroundColor: "#cdcece" }}
               variant="menu"
@@ -211,16 +216,16 @@ class HomePage extends React.Component {
             </WindowContent>
           </Window>
 
-          <h2> testing </h2>
-
           {/* BUTTONS TO DISPLAY DATA  */}
 
           <WindowContent>
             <div style={{ display: "flex" }}>
-              <figure>
-                <img src={recordEntryIcon} alt="" />
-                <figcaption>RECORD ENTRY</figcaption>
-              </figure>
+              <Link to="/record-entry">
+                <figure>
+                  <img src={recordEntryIcon} alt="" />
+                  <figcaption>RECORD ENTRY</figcaption>
+                </figure>
+              </Link>
               <figure>
                 <img
                   src={totalIncomeIcon}
@@ -229,6 +234,7 @@ class HomePage extends React.Component {
                     this.displayTotalIncomeWindow();
                   }}
                 />
+
                 <figcaption>TOTAL INCOME </figcaption>
               </figure>
               {this.state.isDisplayingTotalIncomeWindow && (
@@ -241,7 +247,7 @@ class HomePage extends React.Component {
                   src={totalExpenseIcon}
                   alt=""
                   onClick={() => {
-                    this.displayTotalExpenseWindow();
+                    this.gettingTotalExpenses();
                   }}
                 />
                 <figcaption>TOTAL EXPENSE </figcaption>

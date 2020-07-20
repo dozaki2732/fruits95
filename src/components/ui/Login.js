@@ -55,7 +55,6 @@ class Login extends React.Component {
   }
 
   async setPasswordState(passwordInput, emailInput) {
-    const uniqChars = [...new Set(passwordInput)];
     if (passwordInput === "") {
       this.setState({
         passwordError: "Please create a password.",
@@ -85,7 +84,7 @@ class Login extends React.Component {
       //mimic api response
       axios
         .get(
-          "https://github.com/dozaki2732/fruits95/blob/master/src/components/mock-data/user.json"
+          "https://raw.githubusercontent.com/dozaki2732/fruits95/master/src/components/mock-data/user.json"
         )
         .then((res) => {
           const currentUser = res.data;

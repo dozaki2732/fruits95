@@ -158,7 +158,7 @@ class SignUp extends React.Component {
                     type="email"
                     id="email-input"
                   />
-                  {this.state.hasEmailError !== "" && (
+                  {this.state.hasEmailError != "" && (
                     <div>
                       <p style={{ color: "red" }}>{this.state.emailError}</p>
                       <img
