@@ -18,7 +18,10 @@ export default function SmallWindow(props) {
           size={"sm"}
           square
         >
-          <span style={{ fontWeight: "bold", transform: "translateY(-1px)" }}>
+          <span
+            // onClick={!this.props.state}
+            style={{ fontWeight: "bold", transform: "translateY(-1px)" }}
+          >
             x
           </span>
         </Button>

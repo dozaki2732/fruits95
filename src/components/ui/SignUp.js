@@ -1,4 +1,5 @@
 import React from "react";
+import warning from "../../style/icons/warning.png";
 import {
   Window,
   WindowHeader,
@@ -102,7 +103,7 @@ class SignUp extends React.Component {
   render() {
     return (
       <div>
-        <Window className="windowColoring" style={{ width: 400 }}>
+        <Window className="windowColoring" style={{ width: 500 }}>
           <WindowHeader
             className="windowTopBar"
             style={{
@@ -139,8 +140,15 @@ class SignUp extends React.Component {
                     type="email"
                     id="email-input"
                   />
-                  {this.state.hasEmailError !== "" && (
-                    <p className="text-danger">{this.state.emailError}</p>
+                  {this.state.hasEmailError != "" && (
+                    <div>
+                      <p style={{ color: "red" }}>{this.state.emailError}</p>
+                      <img
+                        src={warning}
+                        alt=""
+                        style={{ width: 25, marginLeft: 10 }}
+                      />
+                    </div>
                   )}
                 </div>
               </div>
@@ -154,11 +162,18 @@ class SignUp extends React.Component {
                   id="password-input"
                 />
                 {this.state.hasPasswordError && (
-                  <p className="text-danger">{this.state.passwordError}</p>
+                  <div>
+                    <p style={{ color: "red" }}>{this.state.passwordError}</p>
+                    <img
+                      src={warning}
+                      alt=""
+                      style={{ width: 25, marginLeft: 10 }}
+                    />
+                  </div>
                 )}
               </div>
               <Button
-                style={{ marginTop: 20, width: 355 }}
+                style={{ marginTop: 20, width: 455 }}
                 onClick={() => {
                   this.validateAndCreateUser();
                 }}

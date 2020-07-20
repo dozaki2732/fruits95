@@ -48,9 +48,13 @@ class HomePage extends React.Component {
       .then((res) => {
         // handle success
         console.log(res.data);
-        props.dispatch({
-          type: actions.STORE_ALL_TRANSACTIONS,
-          payload: res.data,
+        // props.dispatch({
+        //   type: actions.STORE_ALL_TRANSACTIONS,
+        //   payload: res.data,
+        // });
+        this.setState({
+          allTransactions: res.data,
+          displayedTransactions: res.data,
         });
       })
       .catch((error) => {
@@ -87,32 +91,44 @@ class HomePage extends React.Component {
   }
 
   setDisplayedTransactions() {
-    const transactions = [...this.props.transactions];
-    console.log("these are the transaction youre looking for", transactions);
-
-    const filteredTransactions = transactions.filter((transaction) => {
-      const selectedYearMonth = toDisplayDate(this.state.date, "yyyyMM");
-      const transactionYearMonth = toDisplayDate(transaction.date, "yyyyMM");
-      //want it to look like "202007"
-      return selectedYearMonth === transactionYearMonth;
+    this.props.dispatch({
+      type: actions.DISPLAY_TRANSACTIONS,
     });
-    this.setState({ displayedTransactions: filteredTransactions });
+
+    // const transactions = [...this.props.transactions];
+    // console.log("these are the transaction youre looking for", transactions);
+
+    // const filteredTransactions = transactions.filter((transaction) => {
+    //   const selectedYearMonth = toDisplayDate(this.state.date, "yyyyMM");
+    //   const transactionYearMonth = toDisplayDate(transaction.date, "yyyyMM");
+    //   //want it to look like "202007"
+    //   return selectedYearMonth === transactionYearMonth;
+    // });
+    // this.setState({ displayedTransactions: filteredTransactions });
   }
 
-  gettingTotalExpenses() {
-    const transactions = [...this.props.transactions];
-    const filteredTransactions = transactions.filter((transaction) => {
-      const selectedYearMonth = toDisplayDate(this.state.date, "yyyyMM");
-      const transactionYearMonth = toDisplayDate(transaction.date, "yyyyMM");
-      //want it to look like "202007"
-      return selectedYearMonth === transactionYearMonth;
-    });
+  //   gettingTotalExpenses() {
+  //     const transactions = [...this.props.transactions];
+  //     const filteredTransactions = transactions.filter((transaction) => {
+  //       const selectedYearMonth = toDisplayDate(this.state.date, "yyyyMM");
+  //       const transactionYearMonth = toDisplayDate(transaction.date, "yyyyMM");
+  //       //want it to look like "202007"
+  //       return selectedYearMonth === transactionYearMonth;
+  //     });
 
-    const totalExpense = filteredTransactions.filter((transaction) => {
-      if (transaction.type === "expense") return transaction.amount;
-    });
-    this.setState({ displayedTotalExpenses: totalExpense });
-  }
+  //     const totalExpense = filteredTransactions.filter((transaction) => {
+  //       if (transaction.type === "expense") return transaction.amount;
+  //     });
+  //     this.setState({ displayedTotalExpenses: totalExpense });
+  //   }
+
+  //   setOrder(e) {
+  //     const newOrder = e.target.value;
+  //     console.log(newOrder); //"['totalSuccessfulAttempts',' createdAt'], ['desc', 'desc']"
+  //     this.setState({ order: newOrder }, () => {
+  //       this.setMemoryCards();
+  //     });
+  //   }
 
   render() {
     // const transactions = this.props.transactions[3];
@@ -150,10 +166,23 @@ class HomePage extends React.Component {
             >
               logout
             </Button>
+            <Button
+              style={{ backgroundColor: "#cdcece" }}
+              variant="menu"
+              size="sm"
+            >
+              what is this?
+            </Button>
           </Toolbar>
 
           {/* logo window  */}
-          <Window style={{ backgroundColor: "#cdcece", marginTop: "25px" }}>
+          <Window
+            style={{
+              backgroundColor: "#cdcece",
+              marginTop: 50,
+              marginLeft: 20,
+            }}
+          >
             <WindowHeader
               className="windowTopBar"
               style={{
@@ -162,7 +191,7 @@ class HomePage extends React.Component {
                 justifyContent: "space-between",
               }}
             >
-              <h3>you can do it!! </h3>
+              <h3> {toDisplayDate(Date.now(), "MMMM  dd,  yyyy")} </h3>
               <Button
                 style={{ marginRight: "-6px", marginTop: "1px" }}
                 size={"sm"}
@@ -187,41 +216,43 @@ class HomePage extends React.Component {
           {/* BUTTONS TO DISPLAY DATA  */}
 
           <WindowContent>
-            <figure>
-              <img src={recordEntryIcon} alt="" />
-              <figcaption>RECORD ENTRY</figcaption>
-            </figure>
-            <figure>
-              <img
-                src={totalIncomeIcon}
-                alt=""
-                onClick={() => {
-                  this.displayTotalIncomeWindow();
-                }}
-              />
-              <figcaption>TOTAL INCOME </figcaption>
-            </figure>
-            {this.state.isDisplayingTotalIncomeWindow && (
-              <div>
-                <SmallWindow />
-              </div>
-            )}
-            <figure>
-              <img
-                src={totalExpenseIcon}
-                alt=""
-                onClick={() => {
-                  this.displayTotalExpenseWindow();
-                }}
-              />
-              <figcaption>TOTAL EXPENSE </figcaption>
-            </figure>
+            <div style={{ display: "flex" }}>
+              <figure>
+                <img src={recordEntryIcon} alt="" />
+                <figcaption>RECORD ENTRY</figcaption>
+              </figure>
+              <figure>
+                <img
+                  src={totalIncomeIcon}
+                  alt=""
+                  onClick={() => {
+                    this.displayTotalIncomeWindow();
+                  }}
+                />
+                <figcaption>TOTAL INCOME </figcaption>
+              </figure>
+              {this.state.isDisplayingTotalIncomeWindow && (
+                <div>
+                  <SmallWindow />
+                </div>
+              )}
+              <figure>
+                <img
+                  src={totalExpenseIcon}
+                  alt=""
+                  onClick={() => {
+                    this.displayTotalExpenseWindow();
+                  }}
+                />
+                <figcaption>TOTAL EXPENSE </figcaption>
+              </figure>
 
-            {this.state.isDisplayingTotalExpenseWindow && (
-              <div>
-                <SmallWindow />
-              </div>
-            )}
+              {this.state.isDisplayingTotalExpenseWindow && (
+                <div>
+                  <SmallWindow />
+                </div>
+              )}
+            </div>
 
             {/* displaying month name and toggle buttons */}
 
@@ -229,20 +260,27 @@ class HomePage extends React.Component {
               <span onClick={() => this.decrementMonth()}>
                 <img src={LeftArrow} width="30px" alt="" />
               </span>
-              <h2 style={{ marginBottom: "20px" }}>
+              <h1 style={{ marginBottom: "20px" }}>
                 {toDisplayDate(this.state.date, "MMMM")}
-              </h2>
+              </h1>
               <span onClick={() => this.incrementMonth()}>
                 <img src={RightArrow} width="30px" alt="" />
               </span>
             </div>
+
+            {/* table displaying transactions  */}
 
             <Table style={{ backgroundColor: "#FFFFFF" }}>
               <TableHead>
                 <TableRow head>
                   <TableHeadCell>date</TableHeadCell>
                   <TableHeadCell>Category</TableHeadCell>
-                  <TableHeadCell>amount </TableHeadCell>
+                  <TableHeadCell
+                    onClick={(e) => this.setOrder(e)}
+                    value='[["amount"], ["desc"]]'
+                  >
+                    amount
+                  </TableHeadCell>
                 </TableRow>
               </TableHead>
               <TableBody>

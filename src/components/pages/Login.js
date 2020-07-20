@@ -103,7 +103,22 @@ class Login extends React.Component {
         password: hash(passwordInput),
         createdAt: Date.now(),
       };
-      console.log(user);
+      console.log("created user object for POST", user);
+      //mimic api response
+      axios
+        .get("")
+        .then((res) => {
+          const currentUser = res.data;
+          console.log(currentUser);
+          this.props.dispatch({
+            type: actions.UPDATE_CURRENT_USER,
+            payload: res.data,
+          });
+        })
+        .catch((error) => {
+          // handle error
+          console.log(error);
+        });
       this.props.history.push("/home-page");
     }
   }
@@ -111,7 +126,7 @@ class Login extends React.Component {
   render() {
     return (
       <div>
-        <Window className="windowColoring" style={{ width: 400 }}>
+        <Window className="windowColoring" style={{ width: 800 }}>
           <WindowHeader
             className="windowTopBar"
             style={{
@@ -165,7 +180,7 @@ class Login extends React.Component {
                   />
                   {this.state.hasEmailError && (
                     <div>
-                      <p className="text-danger">
+                      <p style={{ color: "red" }}>
                         {this.state.emailError}
                         <img
                           src={warning}
@@ -189,7 +204,7 @@ class Login extends React.Component {
                 />
                 {this.state.hasPasswordError && (
                   <div style={{}}>
-                    <p className="text-danger">
+                    <p style={{ color: "red" }}>
                       {this.state.passwordError}
                       <img
                         src={warning}
