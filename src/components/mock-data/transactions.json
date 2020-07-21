@@ -154,5 +154,26 @@
     "amount": 2500,
     "date": 1593832404000,
     "category": "paycheck"
+  },
+  {
+    "id": "a40857c0-55a8-4d9e-8294-8c3c3bd335c4",
+    "type": "expense",
+    "amount": 130.23,
+    "date": 1593972582000,
+    "category": "groceries"
+  },
+  {
+    "id": "5213f820-3c60-41f2-8e13-275aff4efaee",
+    "type": "expense",
+    "amount": 54.32,
+    "date": 1594058982000,
+    "category": "utility"
+  },
+  {
+    "id": "4c1a1ef4-4973-4ae0-a5ac-e283229fafc6",
+    "type": "expense",
+    "amount": 60.32,
+    "date": 1594058982000,
+    "category": "recreational"
   }
 ]
