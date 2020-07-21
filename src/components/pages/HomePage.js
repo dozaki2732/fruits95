@@ -39,7 +39,8 @@ class HomePage extends React.Component {
       displayedTransactions: [],
       isDisplayingTotalExpenseWindow: false,
       isDisplayingTotalIncomeWindow: false,
-      displayedTotalExpenses: [],
+      displayedTotalExpenses: 0,
+      displayedTotalIncome: 0,
 
       //user
     };
@@ -119,15 +120,40 @@ class HomePage extends React.Component {
       //want it to look like "202007"
       return selectedYearMonth === transactionYearMonth;
     });
-
-    const totalExpenseArray = filteredTransactions.filter(
-      (transaction) => (transaction.type = "expense")
+    const transAmount = [];
+    const totalExpenseTransArray = filteredTransactions.filter(
+      (transaction) => {
+        if (transaction.type === "expense") {
+          transAmount.push(transaction.amount);
+          return transAmount;
+        }
+      }
     );
-    // if (totalExpenseArray.type ===)
-    console.log("thru");
-    console.log(totalExpenseArray);
+    const totalExpenses = transAmount.reduce((a, b) => a + b, 0);
 
-    this.setState({ displayedTotalExpenses: totalExpenseArray });
+    this.setState({ displayedTotalExpenses: totalExpenses });
+  }
+
+  gettingTotalIncome() {
+    const transactions = [...this.props.transactions];
+    const filteredTransactions = transactions.filter((transaction) => {
+      const selectedYearMonth = toDisplayDate(this.state.date, "yyyyMM");
+      const transactionYearMonth = toDisplayDate(transaction.date, "yyyyMM");
+      //want it to look like "202007"
+      return selectedYearMonth === transactionYearMonth;
+    });
+    const transAmount = [];
+    const totalIncomeArray = filteredTransactions.filter((transaction) => {
+      if (transaction.type === "income") {
+        transAmount.push(transaction.amount);
+        return transAmount;
+      }
+    });
+    const totalIncome = transAmount.reduce((a, b) => a + b, 0);
+
+    console.log("total income", totalIncomeArray);
+
+    this.setState({ displayedTotalExpenses: totalIncome });
   }
 
   render() {
@@ -226,22 +252,20 @@ class HomePage extends React.Component {
                   <figcaption>RECORD ENTRY</figcaption>
                 </figure>
               </Link>
+
               <figure>
                 <img
                   src={totalIncomeIcon}
                   alt=""
                   onClick={() => {
-                    this.displayTotalIncomeWindow();
+                    this.gettingTotalIncome();
                   }}
                 />
-
                 <figcaption>TOTAL INCOME </figcaption>
               </figure>
-              {this.state.isDisplayingTotalIncomeWindow && (
-                <div>
-                  <SmallWindow />
-                </div>
-              )}
+              {this.state.isDisplayingTotalIncomeWindow && <div></div>}
+
+              <h2>{this.state.displayedTotalIncome}</h2>
               <figure>
                 <img
                   src={totalExpenseIcon}
@@ -259,6 +283,7 @@ class HomePage extends React.Component {
                 </div>
               )}
             </div>
+            <h2>{this.state.displayedTotalExpenses}</h2>
 
             {/* displaying month name and toggle buttons */}
 
