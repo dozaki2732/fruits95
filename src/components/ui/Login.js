@@ -16,6 +16,7 @@ import "../../style/style.css";
 import { connect } from "react-redux";
 import actions from "../../store/actions";
 import axios from "axios";
+import loginIcon from "../../style/icons/Login1.png";
 
 class Login extends React.Component {
   constructor(props) {
@@ -127,7 +128,7 @@ class Login extends React.Component {
               </span>
             </Button>
           </WindowHeader>
-          <Toolbar className="windowColoring">
+          <Toolbar className="">
             {!this.state.isDisplayingSignUp && (
               <Button
                 variant="menu"
@@ -144,8 +145,15 @@ class Login extends React.Component {
 
           {!this.state.isDisplayingSignUp && (
             <WindowContent>
-              <p>if you already have an account, please login </p>
               <div className="row">
+                <div className="col-4">
+                  <img
+                    src={loginIcon}
+                    alt=""
+                    style={{ width: "60px", position: "relative" }}
+                  />
+                </div>
+                <p>if you already have an account, please login </p>
                 <div className="col-4">
                   <label className="" htmlFor="email">
                     Email address
