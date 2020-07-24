@@ -3,7 +3,7 @@ import { composeWithDevTools } from "redux-devtools-extension";
 import combineReducers from "./combineReducers";
 
 const initialState = {
-  user: {},
+  currentUser: {},
   transactions: {},
 };
 

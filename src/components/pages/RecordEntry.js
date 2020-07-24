@@ -26,63 +26,72 @@ export default class HomePage extends React.Component {
     });
   }
 
+  entryVerification() {
+    //use email login requirements
+    //console log an object
+  }
+
   render() {
     return (
       <>
-        <Window className="windowColoring" style={{ width: 400 }}>
-          <WindowHeader
-            className="windowTopBar"
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-            }}
-          >
-            <h2>Record Entry (*＾▽＾) </h2>
-            <Button
-              style={{ marginRight: "-6px", marginTop: "1px" }}
-              size={"sm"}
-              square
+        <div className="home-page-bg">
+          <Window className="windowColoring" style={{ width: 400 }}>
+            <WindowHeader
+              className="windowTopBar"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
             >
-              <span
-                style={{ fontWeight: "bold", transform: "translateY(-1px)" }}
-              >
-                x
-              </span>
-            </Button>
-          </WindowHeader>
-          <Toolbar>
-            <Link to="/home-page">
+              <h2>Record Entry (*＾▽＾) </h2>
               <Button
-                style={{ backgroundColor: "#cdcece" }}
-                variant="menu"
-                size="sm"
+                style={{ marginRight: "-6px", marginTop: "1px" }}
+                size={"sm"}
+                square
               >
-                back
+                <span
+                  style={{ fontWeight: "bold", transform: "translateY(-1px)" }}
+                >
+                  x
+                </span>
               </Button>
-            </Link>
-          </Toolbar>
-          <WindowContent>
-            <p>amount</p>
-            <NumberField
-              style={{ backgroundColor: "white", marginBottom: 50 }}
-              value={10}
-              onChange={(value) => console.log(value)}
-            />
-            <div>
-              <label htmlFor="email">Date</label>
-              <TextField
+            </WindowHeader>
+            <Toolbar>
+              <Link to="/home-page">
+                <Button
+                  style={{ backgroundColor: "#cdcece" }}
+                  variant="menu"
+                  size="sm"
+                >
+                  back
+                </Button>
+              </Link>
+            </Toolbar>
+            <WindowContent>
+              <p>amount</p>
+              <NumberField
                 style={{ backgroundColor: "white", marginBottom: 50 }}
-                type="email"
+                value={10}
+                onChange={(value) => console.log(value)}
               />
-            </div>
-            <Select
-              style={{ backgroundColor: "white" }}
-              items={transactions.filter((transaction) => transaction.category)}
-              width={150}
-            />
-          </WindowContent>
-        </Window>
+              <div>
+                <label htmlFor="email">Date</label>
+                <TextField
+                  style={{ backgroundColor: "white", marginBottom: 50 }}
+                  type="email"
+                />
+              </div>
+              <Select
+                style={{ backgroundColor: "white" }}
+                items={transactions.filter(
+                  (transaction) => transaction.category
+                )}
+                width={150}
+              />
+            </WindowContent>
+          </Window>
+        </div>
       </>
     );
   }

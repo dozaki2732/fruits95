@@ -12,8 +12,8 @@ import "../../style/style.css";
 import recordEntryIcon from "../../style/icons/recordEntry.png";
 import totalIncomeIcon from "../../style/icons/totalIncomeIcon.png";
 import totalExpenseIcon from "../../style/icons/totalExpenseIcon.png";
-import SmallWindow from "../../components/ui/SmallWindow";
 import { Link } from "react-router-dom";
+import dateIcon from "../../style/icons/dateSelection.png";
 
 import {
   Window,
@@ -28,6 +28,7 @@ import {
   WindowContent,
   Fieldset,
   Toolbar,
+  Cutout,
 } from "react95";
 
 class HomePage extends React.Component {
@@ -36,11 +37,12 @@ class HomePage extends React.Component {
     this.state = {
       date: Date.now(),
       allTransactions: [],
-      displayedTransactions: [],
-      isDisplayingTotalExpenseWindow: false,
-      isDisplayingTotalIncomeWindow: false,
+      // displayedTransactions: [],
       displayedTotalExpenses: 0,
       displayedTotalIncome: 0,
+      // incomeCategories: [],
+      // expenseCategories: [],
+      isDisplayingStats: false,
 
       //user
     };
@@ -57,7 +59,7 @@ class HomePage extends React.Component {
         });
         this.setState({
           allTransactions: res.data,
-          displayedTransactions: res.data,
+          //   displayedTransactions: res.data,
         });
       })
       .catch((error) => {
@@ -71,17 +73,6 @@ class HomePage extends React.Component {
     this.props.dispatch({
       type: actions.UPDATE_CURRENT_USER,
       payload: {},
-    });
-  }
-
-  displayTotalExpenseWindow() {
-    this.setState({
-      isDisplayingTotalExpenseWindow: true,
-    });
-  }
-  displayTotalIncomeWindow() {
-    this.setState({
-      isDisplayingTotalIncomeWindow: true,
     });
   }
 
@@ -101,7 +92,6 @@ class HomePage extends React.Component {
 
   setDisplayedTransactions() {
     const transactions = [...this.props.transactions];
-    console.log("these are the transaction youre looking for", transactions);
 
     const filteredTransactions = transactions.filter((transaction) => {
       const selectedYearMonth = toDisplayDate(this.state.date, "yyyyMM");
@@ -109,29 +99,56 @@ class HomePage extends React.Component {
       //want it to look like "202007"
       return selectedYearMonth === transactionYearMonth;
     });
-    this.setState({ displayedTransactions: filteredTransactions });
+    this.setState({
+      displayedTransactions: filteredTransactions,
+      isDisplayingStats: true,
+    });
   }
 
   gettingTotalExpenses() {
     const transactions = [...this.props.transactions];
-    const filteredTransactions = transactions.filter((transaction) => {
+    const transFilterByTime = transactions.filter((transaction) => {
       const selectedYearMonth = toDisplayDate(this.state.date, "yyyyMM");
       const transactionYearMonth = toDisplayDate(transaction.date, "yyyyMM");
       //want it to look like "202007"
       return selectedYearMonth === transactionYearMonth;
     });
-    const transAmount = [];
-    const totalExpenseTransArray = filteredTransactions.filter(
-      (transaction) => {
-        if (transaction.type === "expense") {
-          transAmount.push(transaction.amount);
-          return transAmount;
-        }
+    let transAmount = [];
+    const totalExpenseTransArray = transFilterByTime.filter((transaction) => {
+      if (transaction.type === "expense") {
+        transAmount.push(transaction.amount);
+        return transAmount;
       }
-    );
-    const totalExpenses = transAmount.reduce((a, b) => a + b, 0);
+    });
+    const totalMonthlyExpenses = transAmount.reduce((a, b) => a + b, 0);
+    // const mappingExp = totalExpenseTransArray.map((transaction) => {
+    //   categoryArr.push(transaction.category);
+    // });
 
-    this.setState({ displayedTotalExpenses: totalExpenses });
+    const totalExpenseNum = transactions.filter((transaction) => {
+      if (transaction.type === "expense") {
+        transAmount.push(transaction.amount);
+        return transAmount;
+      }
+    });
+
+    // const totalAmount = transAmount.reduce((a, b) => a + b, 0);
+
+    // const percentageThatIsSpent =
+    //   ((totalMonthlyExpenses / totalAmount) * 100).toFixed(2) + "%";
+
+    // console.log("this", transAmount, percentageThatIsSpent);
+
+    // const totalExpenses = transactions.filter((transaction) => {
+    //   return transaction.amount.reduce((a, b) => a + b, 0);
+    // });
+
+    // const filteredIn
+
+    this.setState({
+      displayedTotalExpenses: totalMonthlyExpenses,
+      // percentageSpent: percentageThatIsSpent,
+    });
   }
 
   gettingTotalIncome() {
@@ -148,21 +165,23 @@ class HomePage extends React.Component {
         transAmount.push(transaction.amount);
         return transAmount;
       }
+      return transAmount;
     });
     const totalIncome = transAmount.reduce((a, b) => a + b, 0);
+    const displayedCategories = totalIncomeArray.map((transaction) => {
+      return transaction.category;
+    });
 
-    console.log("total income", totalIncomeArray);
-
-    this.setState({ displayedTotalExpenses: totalIncome });
+    this.setState({
+      displayedTotalIncome: totalIncome,
+      incomeCategories: displayedCategories,
+    });
   }
 
   render() {
-    // const transactions = this.props.transactions[3];
-    // console.log("found it", transactions);
-
     return (
       <div className="home-page-bg">
-        <Window className="windowColoring" style={{ width: 700 }}>
+        <Window className="windowColoring" style={{ width: 500 }}>
           <WindowHeader
             className="windowTopBar"
             style={{
@@ -208,8 +227,8 @@ class HomePage extends React.Component {
 
           {/* logo window  */}
           <Window
+            className="windowColoring"
             style={{
-              backgroundColor: "#cdcece",
               marginTop: 50,
               marginLeft: 20,
             }}
@@ -236,106 +255,168 @@ class HomePage extends React.Component {
               </Button>
             </WindowHeader>
             <WindowContent>
-              <Fieldset style={{ width: 250, backgroundColor: "#FFFFFF" }}>
+              <Fieldset
+                style={{
+                  width: 250,
+                  backgroundColor: "#FFFFFF",
+                }}
+              >
                 <img src={logo} alt="" />
               </Fieldset>
+              <div>
+                <Link to="/record-entry">
+                  <figure>
+                    <img src={recordEntryIcon} alt="" />
+                    <figcaption>RECORD ENTRY</figcaption>
+                  </figure>
+                </Link>
+
+                <div style={{ display: "flex", alignItems: "center" }}>
+                  <span onClick={() => this.decrementMonth()}>
+                    <Button>
+                      <img src={LeftArrow} width="40px" alt="" />
+                    </Button>
+                  </span>
+                  <Button style={{ width: "150px", minHeight: "50px" }}>
+                    <h1 style={{ marginBottom: "20px" }}>
+                      {toDisplayDate(this.state.date, "MMMM")}
+                    </h1>
+                  </Button>
+                  <span onClick={() => this.incrementMonth()}>
+                    <Button>
+                      <img src={RightArrow} width="40px" alt="" />
+                    </Button>
+                  </span>
+                </div>
+              </div>
             </WindowContent>
           </Window>
 
           {/* BUTTONS TO DISPLAY DATA  */}
-
           <WindowContent>
-            <div style={{ display: "flex" }}>
-              <Link to="/record-entry">
-                <figure>
-                  <img src={recordEntryIcon} alt="" />
-                  <figcaption>RECORD ENTRY</figcaption>
-                </figure>
-              </Link>
-
-              <figure>
-                <img
-                  src={totalIncomeIcon}
-                  alt=""
-                  onClick={() => {
-                    this.gettingTotalIncome();
-                  }}
-                />
-                <figcaption>TOTAL INCOME </figcaption>
-              </figure>
-              {this.state.isDisplayingTotalIncomeWindow && <div></div>}
-
-              <h2>{this.state.displayedTotalIncome}</h2>
-              <figure>
-                <img
-                  src={totalExpenseIcon}
-                  alt=""
-                  onClick={() => {
-                    this.gettingTotalExpenses();
-                  }}
-                />
-                <figcaption>TOTAL EXPENSE </figcaption>
-              </figure>
-
-              {this.state.isDisplayingTotalExpenseWindow && (
-                <div>
-                  <SmallWindow />
-                </div>
-              )}
-            </div>
-            <h2>{this.state.displayedTotalExpenses}</h2>
+            <Window style={{ width: "100%" }} className="windowColoring">
+              <WindowContent>
+                <Fieldset style={{ color: "white" }}>
+                  <div>
+                    <img
+                      src={totalIncomeIcon}
+                      alt=""
+                      onClick={() => {
+                        this.gettingTotalIncome();
+                      }}
+                    />
+                    <label style={{ color: "black", fontSize: "25px" }}>
+                      total income
+                    </label>
+                    <Cutout>
+                      <h2>
+                        {"$" + this.state.displayedTotalIncome.toFixed(2)}
+                      </h2>
+                    </Cutout>
+                  </div>
+                  <div>
+                    <img
+                      src={totalExpenseIcon}
+                      alt=""
+                      onClick={() => {
+                        this.gettingTotalExpenses();
+                      }}
+                    />
+                    <label style={{ color: "black", fontSize: "25px" }}>
+                      total expense
+                    </label>
+                    <Cutout variant="well" className="footer">
+                      <h2>
+                        {"$" + this.state.displayedTotalExpenses.toFixed(2)}{" "}
+                        <br />
+                        {/* {this.state.percentageSpent} */}
+                      </h2>
+                    </Cutout>
+                  </div>
+                </Fieldset>
+              </WindowContent>
+            </Window>
 
             {/* displaying month name and toggle buttons */}
-
-            <div style={{ display: "flex", alignItems: "center" }}>
-              <span onClick={() => this.decrementMonth()}>
-                <img src={LeftArrow} width="30px" alt="" />
-              </span>
-              <h1 style={{ marginBottom: "20px" }}>
-                {toDisplayDate(this.state.date, "MMMM")}
-              </h1>
-              <span onClick={() => this.incrementMonth()}>
-                <img src={RightArrow} width="30px" alt="" />
-              </span>
-            </div>
-
-            {/* table displaying transactions  */}
-
-            <Table style={{ backgroundColor: "#FFFFFF" }}>
-              <TableHead>
-                <TableRow head>
-                  <TableHeadCell>date</TableHeadCell>
-                  <TableHeadCell>Category</TableHeadCell>
-                  <TableHeadCell
-                    onClick={(e) => this.setOrder(e)}
-                    value='[["amount"], ["desc"]]'
-                  >
-                    amount
-                  </TableHeadCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {this.state.displayedTransactions.map((transaction) => {
-                  return (
-                    <>
-                      <TableRow>
-                        <TableDataCell style={{ textAlign: "center" }}>
-                          {toDisplayDate(transaction.date, "MMM  dd,  yyyy")}
-                        </TableDataCell>
-                        <TableDataCell style={{ textAlign: "center" }}>
-                          {transaction.category}
-                        </TableDataCell>
-                        <TableDataCell style={{ textAlign: "center" }}>
-                          {transaction.amount}
-                        </TableDataCell>
-                      </TableRow>
-                    </>
-                  );
-                })}
-              </TableBody>
-            </Table>
           </WindowContent>
         </Window>
+
+        {/* table displaying transactions  */}
+
+        {this.state.isDisplayingStats && (
+          <Window
+            className="windowColoring"
+            style={{ width: 600, marginLeft: "50px" }}
+          >
+            <WindowHeader
+              className="windowTopBar"
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              total transactions !
+              <Button
+                style={{ marginRight: "-6px", marginTop: "1px" }}
+                size={"sm"}
+                square
+                onClick={() => this.setState({ isDisplayingStats: false })}
+              >
+                <span
+                  style={{
+                    fontWeight: "bold",
+                    transform: "translateY(-1px)",
+                  }}
+                >
+                  x
+                </span>
+              </Button>
+            </WindowHeader>
+            <WindowContent>
+              <Table style={{ backgroundColor: "#FFFFFF" }}>
+                <TableHead>
+                  <TableRow head>
+                    <TableHeadCell>date</TableHeadCell>
+                    <TableHeadCell>Category</TableHeadCell>
+                    <TableHeadCell>amount</TableHeadCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {this.state.displayedTransactions.map((transaction) => {
+                    return (
+                      <>
+                        <TableRow>
+                          <TableDataCell style={{ textAlign: "center" }}>
+                            {toDisplayDate(transaction.date, "MMM  dd,  yyyy")}
+                          </TableDataCell>
+                          <TableDataCell style={{ textAlign: "center" }}>
+                            {transaction.category}
+                          </TableDataCell>
+                          <TableDataCell style={{ textAlign: "center" }}>
+                            {transaction.amount.toFixed(2)}
+                          </TableDataCell>
+                        </TableRow>
+                      </>
+                    );
+                  })}
+                </TableBody>
+              </Table>
+            </WindowContent>
+          </Window>
+        )}
+
+        {/* 
+        <AppBar style={{}}>
+          <Toolbar>
+            <Bar />
+            <Button variant="menu">Edit</Button>
+            <Button variant="menu" disabled>
+              Save
+            </Button>
+            <Bar />
+          </Toolbar>
+        </AppBar> */}
       </div>
     );
   }

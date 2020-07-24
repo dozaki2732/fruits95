@@ -1,5 +1,6 @@
 .windowColoring {
   background-color: #cdcece;
+  border-color: white;
 }
 
 .windowTopBar {
@@ -20,4 +21,15 @@ h2 {
 
 h1 {
   font-family: sans-serif;
+}
+
+.home-page-bg {
+  background-color: rgb(77, 153, 153);
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.statDisplay {
+  width: 50%;
 }
