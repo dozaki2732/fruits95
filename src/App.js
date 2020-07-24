@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Landing from "./components/pages/Landing";
-import HomePage from "./components/pages/HomePage";
+import HomePage from "./components//pages/HomePage";
 import RecordEntry from "./components/pages/RecordEntry";
 
 function App() {
