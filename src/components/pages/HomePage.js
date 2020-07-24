@@ -13,7 +13,7 @@ import recordEntryIcon from "../../style/icons/recordEntry.png";
 import totalIncomeIcon from "../../style/icons/totalIncomeIcon.png";
 import totalExpenseIcon from "../../style/icons/totalExpenseIcon.png";
 import { Link } from "react-router-dom";
-import dateIcon from "../../style/icons/dateSelection.png";
+import balanceIcon from "../../style/icons/balanceIcone.png";
 
 import {
   Window,
@@ -30,6 +30,7 @@ import {
   Toolbar,
   Cutout,
 } from "react95";
+import transactions from "../mock-data/transactions";
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -43,6 +44,7 @@ class HomePage extends React.Component {
       // incomeCategories: [],
       // expenseCategories: [],
       isDisplayingStats: false,
+      currentBalance: 0,
 
       //user
     };
@@ -102,6 +104,48 @@ class HomePage extends React.Component {
     this.setState({
       displayedTransactions: filteredTransactions,
       isDisplayingStats: true,
+    });
+  }
+
+  gettingTotalBalance() {
+    //expenses
+    const transactions = [...this.props.transactions];
+    const totalExpensesTrans = transactions.filter((transaction) => {
+      if (transaction.type === "expense") {
+        return transaction;
+      }
+      return 0;
+    });
+    const totalExpArr = [];
+    const filteringExpArr = totalExpensesTrans.filter((transaction) => {
+      return totalExpArr.push(transaction.amount);
+    });
+    const totalExpBalance = totalExpArr.reduce((a, b) => a + b, 0);
+
+    console.log("look here", totalExpBalance);
+
+    //income
+    const totalIncomeTrans = transactions.filter((transaction) => {
+      if (transaction.type === "income") {
+        return transaction;
+      }
+      return 0;
+    });
+    const totalIncArr = [];
+    const filteringIncArr = totalIncomeTrans.filter((transaction) => {
+      return totalIncArr.push(transaction.amount);
+    });
+    const totalIncBalance = totalIncArr.reduce((a, b) => a + b, 0);
+
+    console.log("look here", totalIncBalance);
+
+    // creating formula
+    const totalBalance = totalIncBalance - totalExpBalance;
+
+    console.log(totalBalance);
+
+    this.setState({
+      currentBalance: totalBalance,
     });
   }
 
@@ -329,7 +373,23 @@ class HomePage extends React.Component {
                       <h2>
                         {"$" + this.state.displayedTotalExpenses.toFixed(2)}{" "}
                         <br />
-                        {/* {this.state.percentageSpent} */}
+                      </h2>
+                    </Cutout>
+                  </div>
+                  <div>
+                    <img
+                      src={balanceIcon}
+                      alt=""
+                      onClick={() => {
+                        this.gettingTotalBalance();
+                      }}
+                    />
+                    <label style={{ color: "black", fontSize: "25px" }}>
+                      BALANCE:
+                    </label>
+                    <Cutout variant="well" className="footer">
+                      <h2>
+                        {"$" + this.state.currentBalance.toFixed(2)} <br />
                       </h2>
                     </Cutout>
                   </div>
