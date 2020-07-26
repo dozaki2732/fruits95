@@ -176,12 +176,12 @@ class HomePage extends React.Component {
       }
     });
 
-    // const totalAmount = transAmount.reduce((a, b) => a + b, 0);
+    const totalAmount = transAmount.reduce((a, b) => a + b, 0);
 
-    // const percentageThatIsSpent =
-    //   ((totalMonthlyExpenses / totalAmount) * 100).toFixed(2) + "%";
+    const percentageThatIsSpent =
+      ((totalMonthlyExpenses / totalAmount) * 100).toFixed(2) + "%";
 
-    // console.log("this", transAmount, percentageThatIsSpent);
+    console.log("this", transAmount, percentageThatIsSpent);
 
     // const totalExpenses = transactions.filter((transaction) => {
     //   return transaction.amount.reduce((a, b) => a + b, 0);
@@ -191,7 +191,7 @@ class HomePage extends React.Component {
 
     this.setState({
       displayedTotalExpenses: totalMonthlyExpenses,
-      // percentageSpent: percentageThatIsSpent,
+      percentageSpent: percentageThatIsSpent,
     });
   }
 
@@ -308,7 +308,7 @@ class HomePage extends React.Component {
             <div>
               <Link to="/record-entry">
                 <figure>
-                  <img src={recordEntryIcon} alt="" />
+                  <img src={recordEntryIcon} alt="" style={{ width: "45px" }} />
                   <figcaption>RECORD ENTRY</figcaption>
                 </figure>
               </Link>
@@ -319,6 +319,7 @@ class HomePage extends React.Component {
                   onClick={() => {
                     this.gettingTotalBalance();
                   }}
+                  style={{ width: "50px" }}
                 />
                 <label style={{ color: "black", fontSize: "25px" }}>
                   BALANCE:
@@ -359,6 +360,27 @@ class HomePage extends React.Component {
         {/* BUTTONS TO DISPLAY DATA  */}
 
         <Window style={{ marginLeft: "50px" }} className="windowColoring">
+          <WindowHeader
+            className="windowTopBar"
+            style={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+            }}
+          >
+            (ﾉ^ヮ^)ﾉ*:・ﾟ✧ STATS:
+            <Button
+              style={{ marginRight: "-6px", marginTop: "1px" }}
+              size={"sm"}
+              square
+            >
+              <span
+                style={{ fontWeight: "bold", transform: "translateY(-1px)" }}
+              >
+                x
+              </span>
+            </Button>
+          </WindowHeader>
           <WindowContent>
             <Fieldset style={{ color: "white" }}>
               <div>
@@ -390,6 +412,7 @@ class HomePage extends React.Component {
                 <Cutout variant="well" className="footer">
                   <h2>
                     {"$" + this.state.displayedTotalExpenses.toFixed(2)} <br />
+                    {this.state.percentageThatIsSpent}
                   </h2>
                 </Cutout>
               </div>

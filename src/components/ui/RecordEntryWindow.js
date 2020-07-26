@@ -7,6 +7,7 @@ import {
   NumberField,
   TextField,
   Select,
+  Tooltip,
   Toolbar,
 } from "react95";
 import { Link } from "react-router-dom";
@@ -14,9 +15,9 @@ import { Link } from "react-router-dom";
 export default class RecordEntryWindow extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isDisplayingDatePicker: false,
-    };
+    // this.state = {
+    //   recording,
+    // };
   }
 
   displayDatePicker() {
@@ -68,6 +69,9 @@ export default class RecordEntryWindow extends React.Component {
               </Link>
             </Toolbar>
             <WindowContent>
+              <input label="income" type="radio" />
+              <input type="radio" />
+
               <p>amount</p>
               <NumberField
                 style={{ backgroundColor: "white", marginBottom: 50 }}
@@ -75,10 +79,19 @@ export default class RecordEntryWindow extends React.Component {
                 onChange={(value) => console.log(value)}
               />
               <div>
-                <label htmlFor="email">Date</label>
+                <Tooltip
+                  text="‍please select the date of the transaction"
+                  enterDelay={100}
+                  leaveDelay={500}
+                  style={{ backgroundColor: "white" }}
+                >
+                  <h3 style={{ marginBottom: "20px" }} disabled>
+                    DATE{" "}
+                  </h3>
+                </Tooltip>
                 <TextField
                   style={{ backgroundColor: "white", marginBottom: 50 }}
-                  type="email"
+                  type="date"
                 />
               </div>
 

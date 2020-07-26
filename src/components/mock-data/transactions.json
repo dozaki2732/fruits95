@@ -175,5 +175,19 @@
     "amount": 60.32,
     "date": 1594058982000,
     "category": "recreational"
+  },
+  {
+    "id": "e09c14ba-e99d-4a1a-a69b-998d536e6cca",
+    "type": "expense",
+    "amount": 423.43,
+    "date": 1595797459000,
+    "category": "utility"
+  },
+  {
+    "id": "6ee28aed-93fc-4640-a0cc-4f33007919ef",
+    "type": "expense",
+    "amount": 15.13,
+    "date": 1595451859000,
+    "category": "recreational"
   }
 ]
