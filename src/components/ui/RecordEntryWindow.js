@@ -126,7 +126,7 @@ export default class RecordEntryWindow extends React.Component {
 
               <div>
                 <Tooltip
-                  text="‍please select the date of the transaction"
+                  text="‍please enter the amount of the transaction"
                   enterDelay={100}
                   leaveDelay={500}
                   style={{ backgroundColor: "white" }}
@@ -140,7 +140,11 @@ export default class RecordEntryWindow extends React.Component {
                   type="number"
                 />
               </div>
-
+              <Link to="/home-page">
+                <Button style={{ minHeight: "50px" }} fullWidth>
+                  Record!
+                </Button>
+              </Link>
               {/* select buttons for categories  */}
             </WindowContent>
           </Window>

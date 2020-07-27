@@ -245,5 +245,19 @@
     "amount": 15.13,
     "date": 1589903023000,
     "category": "refund"
+  },
+  {
+    "id": "82d50a81-5767-4d60-8a3b-81d698016a50",
+    "type": "income",
+    "amount": 50,
+    "date": 1594914223000,
+    "category": "gift"
+  },
+  {
+    "id": "5811faae-3fa2-471b-99db-4975f25c11f4",
+    "type": "expense",
+    "amount": 75.34,
+    "date": 1595691823000,
+    "category": "transportation"
   }
 ]
