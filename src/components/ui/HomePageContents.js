@@ -228,7 +228,7 @@ class HomePage extends React.Component {
 
         <Window
           className="windowColoring"
-          style={{ width: 400, position: "absolute" }}
+          style={{ width: 400, position: "absolute", marginLeft: "75px" }}
         >
           <WindowHeader
             className="windowTopBar"
@@ -280,8 +280,8 @@ class HomePage extends React.Component {
         <Window
           className="windowColoring"
           style={{
-            marginTop: "300px",
-            marginLeft: "20px",
+            marginTop: "450px",
+            marginLeft: "50px",
             position: "relative",
           }}
         >
