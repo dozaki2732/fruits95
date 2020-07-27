@@ -5,7 +5,7 @@ import toDisplayDate from "date-fns/format";
 import RightArrow from "../../style/icons/chevron-right.svg";
 import LeftArrow from "../../style/icons/chevron-left.svg";
 import axios from "axios";
-import logo from "../../style/icons/d02a9595-3a45-483c-8632-25d4c32d9530_200x200.png";
+import logo from "../../style/icons/logo.png";
 import { connect } from "react-redux";
 import actions from "../../store/actions";
 import recordEntryIcon from "../../style/icons/recordEntry.png";
@@ -30,7 +30,6 @@ import {
   Toolbar,
   Cutout,
 } from "react95";
-import transactions from "../mock-data/transactions";
 
 class HomePage extends React.Component {
   constructor(props) {
@@ -224,8 +223,13 @@ class HomePage extends React.Component {
 
   render() {
     return (
-      <div className="">
-        <Window className="windowColoring" style={{ width: 500 }}>
+      <div>
+        {/* logo window  */}
+
+        <Window
+          className="windowColoring"
+          style={{ width: 400, position: "absolute" }}
+        >
           <WindowHeader
             className="windowTopBar"
             style={{
@@ -259,9 +263,6 @@ class HomePage extends React.Component {
                 logout
               </Button>
             </Link>
-            <Button variant="menu" size="sm">
-              what is this?
-            </Button>
           </Toolbar>
           <WindowContent>
             <Fieldset
@@ -270,17 +271,18 @@ class HomePage extends React.Component {
                 backgroundColor: "#FFFFFF",
               }}
             >
-              <img src={logo} alt="" />
+              <img src={logo} style={{ imageRendering: "pixelated" }} alt="" />
             </Fieldset>
           </WindowContent>
         </Window>
 
-        {/* logo window  */}
+        {/* BALANCE WINDOW */}
         <Window
           className="windowColoring"
           style={{
-            marginTop: 50,
-            marginLeft: 20,
+            marginTop: "300px",
+            marginLeft: "20px",
+            position: "relative",
           }}
         >
           <WindowHeader
@@ -427,7 +429,7 @@ class HomePage extends React.Component {
         {this.state.isDisplayingStats && (
           <Window
             className="windowColoring"
-            style={{ width: 600, marginLeft: "50px" }}
+            style={{ width: 600, position: "absolute", marginLeft: "35px" }}
           >
             <WindowHeader
               className="windowTopBar"

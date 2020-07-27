@@ -2,7 +2,6 @@
   background-color: #cdcece;
   border-color: white;
   margin-top: 50px;
-  position: relative;
 }
 
 .windowTopBar {
@@ -29,7 +28,7 @@ h1 {
   background-color: rgb(77, 153, 153);
   width: 100%;
   display: flex;
-  justify-content: center;
+
   height: 130vh;
 }
 
