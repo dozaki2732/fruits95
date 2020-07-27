@@ -1,3 +1,8 @@
+@font-face {
+  font-family: "font"; /*a name to be used later*/
+  src: url("http://domain.com/fonts/font.ttf"); /*URL to font*/
+}
+
 .windowColoring {
   background-color: #cdcece;
   border-color: white;

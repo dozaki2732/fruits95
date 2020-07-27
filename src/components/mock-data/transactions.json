@@ -259,5 +259,12 @@
     "amount": 75.34,
     "date": 1595691823000,
     "category": "transportation"
+  },
+  {
+    "id": "e3f82501-71fe-47fa-a2c9-a5abcbd3be0b",
+    "type": "expense",
+    "amount": 950,
+    "date": 1595864623000,
+    "category": "rent"
   }
 ]

@@ -11,6 +11,7 @@ import {
   Toolbar,
 } from "react95";
 import { Link } from "react-router-dom";
+import logo from "../../style/icons/logo.png";
 
 export default class RecordEntryWindow extends React.Component {
   constructor(props) {
@@ -48,7 +49,7 @@ export default class RecordEntryWindow extends React.Component {
                 justifyContent: "space-between",
               }}
             >
-              <h2>Record Entry (*＾▽＾) </h2>
+              Record Entry (*＾▽＾)
               <Button
                 style={{ marginRight: "-6px", marginTop: "1px" }}
                 size={"sm"}
@@ -141,7 +142,10 @@ export default class RecordEntryWindow extends React.Component {
                 />
               </div>
               <Link to="/home-page">
-                <Button style={{ minHeight: "50px" }} fullWidth>
+                <Button
+                  style={{ minHeight: "50px", marginTop: "30px" }}
+                  fullWidth
+                >
                   Record!
                 </Button>
               </Link>
