@@ -6,6 +6,7 @@ import {
   WindowContent,
   Toolbar,
   TextField,
+  Fieldset,
 } from "react95";
 import { withRouter } from "react-router-dom";
 import { v4 as getUuid } from "uuid";
@@ -17,6 +18,7 @@ import { connect } from "react-redux";
 import actions from "../../store/actions";
 import axios from "axios";
 import loginIcon from "../../style/icons/Login1.png";
+import logo from "../../style/icons/logo.png";
 
 class Login extends React.Component {
   constructor(props) {
@@ -150,10 +152,16 @@ class Login extends React.Component {
             <WindowContent>
               <div className="row">
                 <div className="col-4">
-                  <img
+                  {/* <img
                     src={loginIcon}
                     alt=""
-                    style={{ width: "60px", position: "relative" }}
+                    style={{ width: "70px", marginLeft: "50px" }}
+                  /> */}
+
+                  <img
+                    src={logo}
+                    style={{ imageRendering: "pixelated" }}
+                    alt=""
                   />
                 </div>
                 <p>if you already have an account, please login </p>
