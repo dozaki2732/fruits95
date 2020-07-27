@@ -152,17 +152,17 @@ class Login extends React.Component {
             <WindowContent>
               <div className="row">
                 <div className="col-4">
-                  {/* <img
+                  <img
                     src={loginIcon}
                     alt=""
                     style={{ width: "70px", marginLeft: "50px" }}
-                  /> */}
+                  />
 
-                  <img
+                  {/* <img
                     src={logo}
                     style={{ imageRendering: "pixelated" }}
                     alt=""
-                  />
+                  /> */}
                 </div>
                 <p>if you already have an account, please login </p>
                 <div className="col-4">

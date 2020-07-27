@@ -359,7 +359,7 @@ class HomePage extends React.Component {
                     borderWidth: "1px",
                     borderColor: "white",
                     width: "175px",
-                    alignItems: "center",
+                    textAlign: "center",
                   }}
                 >
                   <h1>{toDisplayDate(this.state.date, "MMMM")}</h1>

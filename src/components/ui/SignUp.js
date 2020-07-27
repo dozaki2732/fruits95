@@ -13,6 +13,7 @@ import hash from "object-hash";
 import { connect } from "react-redux";
 import actions from "../../store/actions";
 import axios from "axios";
+import logo from "../../style/icons/logo.png";
 
 class SignUp extends React.Component {
   constructor(props) {
@@ -146,6 +147,7 @@ class SignUp extends React.Component {
 
           {!this.state.isDisplayingSignUp && (
             <WindowContent>
+              <img src={logo} style={{ imageRendering: "pixelated" }} alt="" />
               <p>please enter : </p>
               <div className="row">
                 <div className="col-4">
