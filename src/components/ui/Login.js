@@ -106,7 +106,10 @@ class Login extends React.Component {
   render() {
     return (
       <div>
-        <Window className="windowColoring" style={{ width: 800 }}>
+        <Window
+          className="windowColoring"
+          style={{ width: 800, marginLeft: "250px" }}
+        >
           <WindowHeader
             className="windowTopBar"
             style={{
