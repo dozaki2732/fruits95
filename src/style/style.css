@@ -33,3 +33,7 @@ h1 {
 .statDisplay {
   width: 50%;
 }
+
+body {
+  font-family: sans-serif;
+}
