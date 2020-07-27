@@ -29,6 +29,7 @@ import {
   Fieldset,
   Toolbar,
   Cutout,
+  Tooltip,
 } from "react95";
 
 class HomePage extends React.Component {
@@ -228,7 +229,7 @@ class HomePage extends React.Component {
 
         <Window
           className="windowColoring"
-          style={{ width: 400, position: "absolute", marginLeft: "75px" }}
+          style={{ width: "345px", position: "absolute", marginLeft: "75px" }}
         >
           <WindowHeader
             className="windowTopBar"
@@ -266,9 +267,11 @@ class HomePage extends React.Component {
           </Toolbar>
           <WindowContent>
             <Fieldset
+              variant="flat"
               style={{
                 width: 250,
                 backgroundColor: "#FFFFFF",
+                borderOutline: "#717171",
               }}
             >
               <img src={logo} style={{ imageRendering: "pixelated" }} alt="" />
@@ -315,18 +318,19 @@ class HomePage extends React.Component {
                 </figure>
               </Link>
               <div>
+                <label style={{ color: "black", fontSize: "25px" }}>
+                  BALANCE:
+                </label>
                 <img
                   src={balanceIcon}
                   alt=""
                   onClick={() => {
                     this.gettingTotalBalance();
                   }}
-                  style={{ width: "50px" }}
+                  style={{ width: "50px", marginLeft: "75px" }}
                 />
-                <label style={{ color: "black", fontSize: "25px" }}>
-                  BALANCE:
-                </label>
-                <Cutout variant="well" className="footer">
+
+                <Cutout style={{ borderWidth: "1px", borderColor: "white" }}>
                   <h2>
                     {"$" + this.state.currentBalance.toFixed(2)} <br />
                   </h2>
@@ -344,11 +348,16 @@ class HomePage extends React.Component {
                     <img src={LeftArrow} width="40px" alt="" />
                   </Button>
                 </span>
-                <Button style={{ width: "150px", minHeight: "50px" }}>
-                  <h1 style={{ marginBottom: "20px" }}>
-                    {toDisplayDate(this.state.date, "MMMM")}
-                  </h1>
-                </Button>
+                <Cutout
+                  style={{
+                    borderWidth: "1px",
+                    borderColor: "white",
+                    width: "175px",
+                    alignItems: "center",
+                  }}
+                >
+                  <h1>{toDisplayDate(this.state.date, "MMMM")}</h1>
+                </Cutout>
                 <span onClick={() => this.incrementMonth()}>
                   <Button>
                     <img src={RightArrow} width="40px" alt="" />
@@ -384,7 +393,7 @@ class HomePage extends React.Component {
             </Button>
           </WindowHeader>
           <WindowContent>
-            <Fieldset style={{ color: "white" }}>
+            <Fieldset style={{ borderWidth: "1px", borderColor: "white" }}>
               <div>
                 <img
                   src={totalIncomeIcon}
@@ -396,7 +405,7 @@ class HomePage extends React.Component {
                 <label style={{ color: "black", fontSize: "25px" }}>
                   total income
                 </label>
-                <Cutout>
+                <Cutout style={{ borderWidth: "1px", borderColor: "white" }}>
                   <h2>{"$" + this.state.displayedTotalIncome.toFixed(2)}</h2>
                 </Cutout>
               </div>
@@ -411,7 +420,7 @@ class HomePage extends React.Component {
                 <label style={{ color: "black", fontSize: "25px" }}>
                   total expense
                 </label>
-                <Cutout variant="well" className="footer">
+                <Cutout style={{ borderWidth: "1px", borderColor: "white" }}>
                   <h2>
                     {"$" + this.state.displayedTotalExpenses.toFixed(2)} <br />
                     {this.state.percentageThatIsSpent}

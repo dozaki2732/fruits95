@@ -15,9 +15,10 @@ import { Link } from "react-router-dom";
 export default class RecordEntryWindow extends React.Component {
   constructor(props) {
     super(props);
-    // this.state = {
-    //   recording,
-    // };
+    this.state = {
+      recordingIncome: false,
+      recordingExpense: true,
+    };
   }
 
   displayDatePicker() {
@@ -35,7 +36,10 @@ export default class RecordEntryWindow extends React.Component {
     return (
       <>
         <div>
-          <Window className="windowColoring" style={{ width: 400 }}>
+          <Window
+            className="windowColoring"
+            style={{ width: 400, marginLeft: "200px" }}
+          >
             <WindowHeader
               className="windowTopBar"
               style={{
@@ -69,15 +73,40 @@ export default class RecordEntryWindow extends React.Component {
               </Link>
             </Toolbar>
             <WindowContent>
-              <input label="income" type="radio" />
-              <input type="radio" />
+              <div>
+                <Tooltip
+                  text="‍please enter either income or expense"
+                  enterDelay={100}
+                  leaveDelay={500}
+                  style={{ backgroundColor: "white" }}
+                >
+                  <h3 style={{ marginBottom: "20px" }} disabled>
+                    TYPE:
+                  </h3>
+                </Tooltip>
+                <TextField
+                  style={{ backgroundColor: "white", marginBottom: 50 }}
+                  type="input"
+                />
+              </div>
 
-              <p>amount</p>
-              <NumberField
-                style={{ backgroundColor: "white", marginBottom: 50 }}
-                value={10}
-                onChange={(value) => console.log(value)}
-              />
+              <div>
+                <Tooltip
+                  text="‍please enter the category of the transaction"
+                  enterDelay={100}
+                  leaveDelay={500}
+                  style={{ backgroundColor: "white" }}
+                >
+                  <h3 style={{ marginBottom: "20px" }} disabled>
+                    CATEGORY:
+                  </h3>
+                </Tooltip>
+                <TextField
+                  style={{ backgroundColor: "white", marginBottom: 50 }}
+                  type="input"
+                />
+              </div>
+
               <div>
                 <Tooltip
                   text="‍please select the date of the transaction"
@@ -86,12 +115,29 @@ export default class RecordEntryWindow extends React.Component {
                   style={{ backgroundColor: "white" }}
                 >
                   <h3 style={{ marginBottom: "20px" }} disabled>
-                    DATE{" "}
+                    DATE:
                   </h3>
                 </Tooltip>
                 <TextField
                   style={{ backgroundColor: "white", marginBottom: 50 }}
                   type="date"
+                />
+              </div>
+
+              <div>
+                <Tooltip
+                  text="‍please select the date of the transaction"
+                  enterDelay={100}
+                  leaveDelay={500}
+                  style={{ backgroundColor: "white" }}
+                >
+                  <h3 style={{ marginBottom: "20px" }} disabled>
+                    AMOUNT:
+                  </h3>
+                </Tooltip>
+                <TextField
+                  style={{ backgroundColor: "white", marginBottom: 50 }}
+                  type="number"
                 />
               </div>
 
