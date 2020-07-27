@@ -283,7 +283,7 @@ class HomePage extends React.Component {
         <Window
           className="windowColoring"
           style={{
-            marginTop: "450px",
+            marginTop: "400px",
             marginLeft: "50px",
             position: "relative",
           }}
@@ -309,14 +309,20 @@ class HomePage extends React.Component {
               </span>
             </Button>
           </WindowHeader>
+          <Toolbar>
+            <Link to="/record-entry">
+              <Button variant="menu" style={{ marginBotton: "20px" }}>
+                <img
+                  src={recordEntryIcon}
+                  alt=""
+                  style={{ width: "30px", marginRight: "15px" }}
+                />
+                record entry
+              </Button>
+            </Link>
+          </Toolbar>
           <WindowContent>
             <div>
-              <Link to="/record-entry">
-                <figure>
-                  <img src={recordEntryIcon} alt="" style={{ width: "45px" }} />
-                  <figcaption>RECORD ENTRY</figcaption>
-                </figure>
-              </Link>
               <div>
                 <label style={{ color: "black", fontSize: "25px" }}>
                   BALANCE:
@@ -327,7 +333,7 @@ class HomePage extends React.Component {
                   onClick={() => {
                     this.gettingTotalBalance();
                   }}
-                  style={{ width: "50px", marginLeft: "75px" }}
+                  style={{ width: "50px", marginLeft: "100px" }}
                 />
 
                 <Cutout style={{ borderWidth: "1px", borderColor: "white" }}>
