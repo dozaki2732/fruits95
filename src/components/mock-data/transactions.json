@@ -210,5 +210,19 @@
     "amount": 45.34,
     "date": 1589908999000,
     "category": "misc"
+  },
+  {
+    "id": "63334e2b-98a3-4917-b1ef-a9d8d1403211",
+    "type": "income",
+    "amount": 1200,
+    "date": 1593272623000,
+    "category": "paycheck"
+  },
+  {
+    "id": "1e98303a-d960-46cf-a23e-d39edca4e4fd",
+    "type": "expense",
+    "amount": 88.8,
+    "date": 1590594223000,
+    "category": "restaurant"
   }
 ]
