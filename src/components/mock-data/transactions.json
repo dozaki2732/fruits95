@@ -189,5 +189,26 @@
     "amount": 15.13,
     "date": 1595451859000,
     "category": "recreational"
+  },
+  {
+    "id": "12a68b35-5ade-4c5e-af5a-667e7fd495d4",
+    "type": "expense",
+    "amount": 22.76,
+    "date": 1588799059000,
+    "category": "cosmetic"
+  },
+  {
+    "id": "b9328d68-f10e-45d1-a0f2-9fca1f79ae05",
+    "type": "expense",
+    "amount": 88,
+    "date": 1589663059000,
+    "category": "groceries"
+  },
+  {
+    "id": "8210e5ac-67c6-4dcb-8d55-b9cf34b76ec9",
+    "type": "expense",
+    "amount": 45.34,
+    "date": 1589908999000,
+    "category": "misc"
   }
 ]
