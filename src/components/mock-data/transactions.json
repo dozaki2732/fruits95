@@ -224,5 +224,26 @@
     "amount": 88.8,
     "date": 1590594223000,
     "category": "restaurant"
+  },
+  {
+    "id": "bdd27fad-4ab4-4b57-87e4-4cd0c9942655",
+    "type": "expense",
+    "amount": 12.3,
+    "date": 1588520623000,
+    "category": "cosmetic"
+  },
+  {
+    "id": "0b20d3c2-65e8-47c9-a6cd-369fc423a02b",
+    "type": "expense",
+    "amount": 12.3,
+    "date": 1589298223000,
+    "category": "misc"
+  },
+  {
+    "id": "0bb53406-7ea4-4b02-81b0-73ec5da364da",
+    "type": "income",
+    "amount": 15.13,
+    "date": 1589903023000,
+    "category": "refund"
   }
 ]
