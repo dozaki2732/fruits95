@@ -336,7 +336,14 @@ class HomePage extends React.Component {
                   style={{ width: "50px", marginLeft: "100px" }}
                 />
 
-                <Cutout style={{ borderWidth: "1px", borderColor: "white" }}>
+                <Cutout
+                  style={{
+                    borderWidth: "1px",
+                    borderColor: "white",
+                    backgroundColor: "#FFFFFF",
+                    borderOutline: "#717171",
+                  }}
+                >
                   <h2>
                     {"$" + this.state.currentBalance.toFixed(2)} <br />
                   </h2>
@@ -360,6 +367,8 @@ class HomePage extends React.Component {
                     borderColor: "white",
                     width: "175px",
                     textAlign: "center",
+                    backgroundColor: "#FFFFFF",
+                    borderOutline: "#717171",
                   }}
                 >
                   <h1>{toDisplayDate(this.state.date, "MMMM")}</h1>
@@ -411,7 +420,14 @@ class HomePage extends React.Component {
                 <label style={{ color: "black", fontSize: "25px" }}>
                   total income
                 </label>
-                <Cutout style={{ borderWidth: "1px", borderColor: "white" }}>
+                <Cutout
+                  style={{
+                    borderWidth: "1px",
+                    borderColor: "white",
+                    backgroundColor: "#FFFFFF",
+                    borderOutline: "#717171",
+                  }}
+                >
                   <h2>{"$" + this.state.displayedTotalIncome.toFixed(2)}</h2>
                 </Cutout>
               </div>
@@ -426,7 +442,14 @@ class HomePage extends React.Component {
                 <label style={{ color: "black", fontSize: "25px" }}>
                   total expense
                 </label>
-                <Cutout style={{ borderWidth: "1px", borderColor: "white" }}>
+                <Cutout
+                  style={{
+                    borderWidth: "1px",
+                    borderColor: "white",
+                    backgroundColor: "#FFFFFF",
+                    borderOutline: "#717171",
+                  }}
+                >
                   <h2>
                     {"$" + this.state.displayedTotalExpenses.toFixed(2)} <br />
                     {this.state.percentageThatIsSpent}
